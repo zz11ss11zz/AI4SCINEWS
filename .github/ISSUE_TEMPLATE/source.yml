@@ -1,0 +1,30 @@
+name: 推荐新信源
+description: 建议持续跟踪的期刊、会议、软件、代码仓库或科研 Skill
+title: "[信源推荐] "
+body:
+  - type: input
+    id: source
+    attributes:
+      label: 官方链接
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 类别
+      options:
+        - 期刊或会议
+        - 科研软件
+        - 代码仓库
+        - 科研 Skill
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: 为什么值得持续关注？
+      description: 可以举一个与 AI4SCI 关注领域相关的例子。
+    validations:
+      required: true
