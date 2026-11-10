@@ -114,13 +114,14 @@
 | [Aspen Plus](https://www.aspentech.com/en/products/engineering/aspen-plus) | 物性、反应、分离及化工与制药工艺优化。 | 已列入跟踪目录 |
 | [gPROMS](https://www.siemens.com/en-us/products/gproms/) | 关注过程机理、动态模拟、反应与分离及研发到生产衔接。跟踪公开2026.1版本说明修订和官方产品文章，非完整版本日志。 | 已列入跟踪目录 |
 
-## 代码仓库（41）
+## 代码仓库（44）
 
 | 名称与官方入口 | 关注内容 | 状态 |
 |---|---|---|
 | [MOOSE](https://github.com/idaholab/moose) | 关注正式版本中耦合求解器、网格自适应和仿真应用接口的变化。 | 已列入跟踪目录 |
 | [FAIRChem](https://github.com/facebookresearch/fairchem) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
 | [DeePMD-kit / DPA](https://github.com/deepmodeling/deepmd-kit) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
+| [Trilinos](https://github.com/trilinos/Trilinos) | 关注数值算法与求解器正确性、并行性能、软硬件兼容性、接口和许可变化；具体更新仍须核对发布说明与提交证据。 | 已列入跟踪目录 |
 | [MACE](https://github.com/ACEsuit/mace) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
 | [GNoME](https://github.com/google-deepmind/materials_discovery) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
 | [NequIP](https://github.com/mir-group/nequip) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
@@ -151,18 +152,13 @@
 | [MLIP-MC](https://github.com/jackevansadl/MLIP-MC) | 关注方法、模型与接口更新，以及计算流程的可复现性。 | 已列入跟踪目录 |
 | [VASP_HTC_framework](https://github.com/bitsoal/VASP_HTC_framework) | 关注 Python 3 迁移、VASP 计算流程与输入设置、任务管理以及 pymatgen 依赖兼容性。 | 已列入跟踪目录 |
 | [EquFlash / GGNN](https://github.com/SamsungDS/GGNN) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
+| [alignn](https://github.com/atomgptlab/alignn) | 关注模型、权重、计算正确性和兼容性更新。 | 已列入跟踪目录 |
 | [Eqnorm](https://github.com/yzchen08/eqnorm) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
 | [Augmented CGCNN](https://github.com/JasonGibsonUfl/Augmented_CGCNN) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
 | [BAM](https://github.com/myung-group/BAM-torch) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
+| [MACE-SOYO](https://github.com/PrincessHakuryu/MACE-SOYO) | 关注模型、权重、计算正确性和兼容性更新。 | 已列入跟踪目录 |
 | [EGMOF](https://github.com/Yeonghun1675/EGMOF) | 关注方法、模型与接口更新，以及计算流程的可复现性。 | 已列入跟踪目录 |
-| [Awesome MLIPs Benchmark](https://github.com/ShiqianTan/awesome-MLIPs-benchmark) | 关注 README、data/ 与 mlip-arch-gallery/SOURCES.md 中新增或修订的基准、模型论文映射、评测协议和许可。重要变化回查原始来源，核验后再讨论是否纳入榜单，不自动发布或改变评分。 | 已列入跟踪目录 |
 | [ESNet](https://github.com/zzz-sl/ESNet) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
+| [Awesome MLIPs Benchmark](https://github.com/ShiqianTan/awesome-MLIPs-benchmark) | 关注 README、data/ 与 mlip-arch-gallery/SOURCES.md 中新增或修订的基准、模型论文映射、评测协议和许可。重要变化回查原始来源，核验后再讨论是否纳入榜单，不自动发布或改变评分。 | 已列入跟踪目录 |
 | [AlchemBERT](https://gitee.com/liuxiaotong15/alchemBERT) | 关注训练代码、数据处理与评测方法。 | 目录展示，暂未自动检查 |
 | [EMA-GNN](https://github.com/submerged-in-matrix/ema-gnn) | 关注模型与权重更新、计算正确性、兼容性、许可和可复现性变化。 | 已列入跟踪目录 |
-
-## 科研 Skill（2）
-
-| 名称与官方入口 | 关注内容 | 状态 |
-|---|---|---|
-| [Academic Research Skills](https://github.com/Imbad0202/academic-research-skills) | 关注研究工作流、新增技能及论文写作与评审工具的版本变化。 | 待上线 |
-| [Nature Skills](https://github.com/Yuan1z0825/nature-skills) | 关注新增科研技能、使用入口和安装方式的版本变化。 | 待上线 |
