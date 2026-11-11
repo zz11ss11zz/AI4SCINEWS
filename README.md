@@ -1,4 +1,11 @@
-## 致敬基础势函数四周年
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
+    <img src="assets/wordmark.svg" alt="AI4SCI" width="260">
+  </picture>
+</p>
+
+# Special: 致敬基础势函数四周年 (2022.11.28-2026.11.28)
 
 | Claude Fable 5.2 | GPT6 Astra |
 | --- | --- |
@@ -20,13 +27,6 @@
 </details>
 
 **征集 Gemini 4 Carbon 版**　如果由你来讲这四年，你会选哪项工作作为开场？欢迎用 Gemini 4 Carbon 制作一部同题短片，在[本仓库提交 Issue](https://github.com/zz11ss11zz/AI4SCINEWS/issues/new) 分享作品链接。也欢迎附上提示词或简短的制作说明，方便大家对照三版的选材、叙事和画面。
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
-    <img src="assets/wordmark.svg" alt="AI4SCI" width="260">
-  </picture>
-</p>
 
 # AI4SCI · 科研计算与工业仿真情报
 
