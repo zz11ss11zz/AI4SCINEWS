@@ -26,8 +26,6 @@
 
 </details>
 
-[下载 Gemini 4 Carbon 交互原作（HTML）](https://github.com/zz11ss11zz/AI4SCINEWS/raw/refs/heads/main/assets/videos/google_carbon_mlff.html)，保存后用浏览器打开即可播放。
-
 # AI4SCI · 科研计算与工业仿真情报
 
 做电池材料的分子动力学模拟，今天有哪些论文值得读？选机器学习力场时，哪个模型在关心的任务上表现更好？常用的科学软件最近发布了什么版本？
