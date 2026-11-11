@@ -1,3 +1,26 @@
+## 致敬基础势函数四周年
+
+| Claude Fable 5.2 | GPT6 Astra |
+| --- | --- |
+| https://github.com/user-attachments/assets/4610ac1d-d926-491c-8ffc-de0dc898e112 | https://github.com/user-attachments/assets/86a9e26b-ca36-411a-8f7b-0b2ac91dc5b8 |
+
+<details>
+<summary>查看视频制作提示词（Gemini 4 Carbon 投稿可沿用）</summary>
+
+清除记忆，新建一个项目。假设你是一个导演与 AI for Science 领域的资深人士。
+
+用你最好的能力做一支 40 秒到 1 分钟的 MLFF foundational potential 四周年致敬动效视频（2022.11.28–2026.11.28），16:9 横版，无旁白，配原创音乐。
+
+内容自己联网查证，讲这四年 MLFF foundational potential 的关键模型、里程碑、模型架构迭代（最好用示意图的形式展示，比如不变与等变，后续有的模型考虑了磁矩，如 CHGNet，以及电荷，如 [QET](https://arxiv.org/abs/2511.07249)），数据集的进步（比如多样性、数据规模、数据采集方法改进等，包括 OMat24、MatPES 等），对 AI for Science 领域的贡献（高通量筛选、加快分子动力学等）和相关研究数目的增长，不得杜撰。不要展示无意义或空洞的图片。
+
+动手前先去 [Google](https://www.google.com/) 和 [Matbench Discovery](https://github.com/janosh/matbench-discovery) 等查找关于这些模型的详细资料。视觉结果要给人科技飞速进步的感觉。Matbench Discovery 如果出现，一定要在最后，因为它不是模型，而是对模型的总览与对比打分。
+
+作为科研领域，相关的所有图片、表述等一定要严谨正确。节奏要快，动效密、画面饱满，消除 AI 感，随音乐卡点。
+
+</details>
+
+**征集 Gemini 4 Carbon 版**　如果由你来讲这四年，你会选哪项工作作为开场？欢迎用 Gemini 4 Carbon 制作一部同题短片，在[本仓库提交 Issue](https://github.com/zz11ss11zz/AI4SCINEWS/issues/new) 分享作品链接。也欢迎附上提示词或简短的制作说明，方便大家对照三版的选材、叙事和画面。
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/wordmark-dark.svg">
@@ -41,30 +64,6 @@ AI4SCI 把论文、评测榜单和工具更新放在一个中文网站里，面�
 页面保留来源榜单的顺序和入口。NIST CHIPS-FF 专项可单独查看；比较数值前，可以回到对应来源核对测试集、指标和模型版本。
 
 [![线上 MLFF 榜单，可按评测任务切换并打开模型来源](assets/mlff.png)][mlff]
-
-### 致敬基础势函数四周年
-
-同一个主题，两部短片。欢迎对照观看，看看两种创作方式各自选了哪些节点，又怎样把四年的研究进展讲给观众。
-
-- [观看 Claude Fable 5.2 版（MP4）](assets/videos/mlff-four-years-claude-fable-5-2.mp4)
-- [观看 GPT6 Astra 版（MP4）](assets/videos/mlff-four-years-gpt6-astra.mp4)
-
-<details>
-<summary>查看视频制作提示词（Gemini 4 Carbon 投稿可沿用）</summary>
-
-清除记忆，新建一个项目。假设你是一个导演与 AI for Science 领域的资深人士。
-
-用你最好的能力做一支 40 秒到 1 分钟的 MLFF foundational potential 四周年致敬动效视频（2022.11.28–2026.11.28），16:9 横版，无旁白，配原创音乐。
-
-内容自己联网查证，讲这四年 MLFF foundational potential 的关键模型、里程碑、模型架构迭代（最好用示意图的形式展示，比如不变与等变，后续有的模型考虑了磁矩，如 CHGNet，以及电荷，如 [QET](https://arxiv.org/abs/2511.07249)），数据集的进步（比如多样性、数据规模、数据采集方法改进等，包括 OMat24、MatPES 等），对 AI for Science 领域的贡献（高通量筛选、加快分子动力学等）和相关研究数目的增长，不得杜撰。不要展示无意义或空洞的图片。
-
-动手前先去 [Google](https://www.google.com/) 和 [Matbench Discovery](https://github.com/janosh/matbench-discovery) 等查找关于这些模型的详细资料。视觉结果要给人科技飞速进步的感觉。Matbench Discovery 如果出现，一定要在最后，因为它不是模型，而是对模型的总览与对比打分。
-
-作为科研领域，相关的所有图片、表述等一定要严谨正确。节奏要快，动效密、画面饱满，消除 AI 感，随音乐卡点。
-
-</details>
-
-**征集 Gemini 4 Carbon 版**　如果由你来讲这四年，你会选哪项工作作为开场？欢迎用 Gemini 4 Carbon 制作一部同题短片，在[本仓库提交 Issue](https://github.com/zz11ss11zz/AI4SCINEWS/issues/new) 分享作品链接。也欢迎附上提示词或简短的制作说明，方便大家对照三版的选材、叙事和画面。
 
 ### 跟工具：从项目名称找到官方更新
 
