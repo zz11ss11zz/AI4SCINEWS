@@ -1,0 +1,1471 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2022.11.28 — 2026.11.28 | MLFF Foundational Potentials 4th Anniversary</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #030407;
+    color: #f2f5f8;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    overflow: hidden;
+  }
+  #viewport {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #030407;
+    overflow: hidden;
+  }
+  #wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1920px;
+    height: 1080px;
+    min-width: 1920px;
+    min-height: 1080px;
+    background: #06080d;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(0.5);
+    box-shadow: 0 24px 90px rgba(0,0,0,0.92), 0 0 0 1px rgba(255,255,255,0.15);
+    overflow: hidden;
+  }
+  canvas {
+    display: block;
+    width: 1920px;
+    height: 1080px;
+  }
+  #overlay {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 45%, rgba(14,22,36,0.94), rgba(5,7,11,0.99));
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 24px; text-align: center; z-index: 20;
+  }
+  .kicker {
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    font-size: 16px; letter-spacing: 0.28em; color: #00d4b6;
+    border: 1px solid rgba(0,212,182,0.45); padding: 8px 22px;
+  }
+  .title { font-size: 68px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.06; }
+  .sub {
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    font-size: 20px; color: #8899ae; letter-spacing: 0.06em;
+  }
+  #playBtn {
+    margin-top: 10px;
+    background: #ff4f17; color: #05070b; border: none;
+    padding: 20px 50px; cursor: pointer;
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    font-size: 21px; font-weight: 900; letter-spacing: 0.12em;
+    box-shadow: 0 0 50px rgba(255,79,23,0.45);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  #playBtn:hover { transform: scale(1.04); background: #ff6938; }
+  .foot-note {
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace;
+    font-size: 13px; color: #6e7f94; max-width: 1080px; line-height: 1.65;
+  }
+  #bar {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 48px;
+    background: rgba(5,7,12,0.94); border-top: 1px solid rgba(255,255,255,0.18);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 38px; z-index: 15;
+    font-family: "JetBrains Mono", "SF Mono", Consolas, monospace; font-size: 12px;
+  }
+  .ctrls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .cbtn {
+    background: rgba(255,255,255,0.06); color: #f2f5f8;
+    border: 1px solid rgba(255,255,255,0.24);
+    padding: 5px 13px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;
+  }
+  .cbtn:hover { background: #ff4f17; color: #000; border-color: #ff4f17; }
+  #scrub { width: 240px; accent-color: #ff4f17; cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="viewport">
+  <div id="wrap">
+    <canvas id="cv" width="1920" height="1080"></canvas>
+
+    <div id="overlay">
+      <div class="kicker">2022.11.28 — 2026.11.28 · 4TH ANNIVERSARY TRIBUTE</div>
+      <div class="title">FOUR YEARS OF MLFF<br>FOUNDATIONAL POTENTIALS</div>
+      <div class="sub">机器学习力场基座势函数四周年致敬 · 16:9 无旁白原创电音卡点动效片</div>
+      <button id="playBtn">▶ PLAY FILM (48.0s · 135 BPM)</button>
+      <div class="foot-note">
+        RIGOROUS MILESTONES: M3GNet · CHGNet · MACE-MP-0 · MatterSim · SevenNet · ORB · OMat24 · eSEN · MatPES · UMA · QET (arXiv:2511.07249) · GRACE-3L · PET-OAM-XL · DPA-4.1 · MATBENCH DISCOVERY
+      </div>
+    </div>
+
+    <div id="bar">
+      <div id="tel" style="color:#8fa1b8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-right:16px;">[READY] 2022.11.28 — 2026.11.28 · MLFF FOUNDATIONAL POTENTIALS</div>
+      <div class="ctrls">
+        <button class="cbtn" id="btnPP">PAUSE</button>
+        <input type="range" id="scrub" min="0" max="48" step="0.04" value="0">
+        <button class="cbtn" id="btnMute">AUDIO: ON</button>
+        <button class="cbtn" id="btnFS">FULLSCREEN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  var viewport = document.getElementById("viewport");
+  var wrap = document.getElementById("wrap");
+  var cv = document.getElementById("cv");
+  var ctx = cv.getContext("2d");
+  var overlay = document.getElementById("overlay");
+  var telEl = document.getElementById("tel");
+  var scrub = document.getElementById("scrub");
+  var btnPP = document.getElementById("btnPP");
+  var btnMute = document.getElementById("btnMute");
+
+  var dpr = 1;
+  function fit() {
+    var rect = viewport.getBoundingClientRect();
+    var vw = rect.width || document.documentElement.clientWidth || window.innerWidth;
+    var vh = rect.height || document.documentElement.clientHeight || window.innerHeight;
+    var s = Math.min((vw - 4) / 1920, (vh - 4) / 1080);
+    if (!(s > 0)) s = 0.5;
+    wrap.style.transform = "translate(-50%, -50%) scale(" + s.toFixed(5) + ")";
+
+    var nextDpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (nextDpr !== dpr) {
+      dpr = nextDpr;
+      cv.width = Math.round(1920 * dpr);
+      cv.height = Math.round(1080 * dpr);
+    }
+  }
+  window.addEventListener("resize", fit);
+  if (window.ResizeObserver) {
+    new ResizeObserver(fit).observe(viewport);
+  }
+  fit();
+
+  document.getElementById("btnFS").onclick = function() {
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(function(){});
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  };
+
+  var BPM = 135;
+  var BEAT = 60 / BPM;
+  var STEP = BEAT / 4;
+  var TOTAL_BEATS = 108;
+  var DUR = TOTAL_BEATS * BEAT;
+
+  var C = {
+    bg: "#06080d",
+    ink: "#f2f5f8",
+    muted: "#7d8fa6",
+    dim: "rgba(242,245,248,0.13)",
+    line: "rgba(242,245,248,0.26)",
+    orange: "#ff4f17",
+    cyan: "#00d4b6",
+    gold: "#ffb800",
+    blue: "#388bfd",
+    red: "#ff3355"
+  };
+
+  var MONO = '"JetBrains Mono", "SF Mono", Consolas, monospace';
+  var SANS = '"Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif';
+
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function easeOut(x) { var t = clamp(x, 0, 1); return 1 - Math.pow(1 - t, 4); }
+  function lerp(a, b, t) { return a + (b - a) * clamp(t, 0, 1); }
+
+  var ac = null, master = null, bus = null;
+  var playing = false, muted = false, startAt = 0, pausedAt = 0, lastStep = -1;
+
+  function m2f(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+
+  function initAudio() {
+    if (ac) return;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    ac = new AC();
+    var comp = ac.createDynamicsCompressor();
+    comp.threshold.value = -14;
+    comp.ratio.value = 4;
+    master = ac.createGain();
+    master.gain.value = muted ? 0 : 0.82;
+    comp.connect(master);
+    master.connect(ac.destination);
+    bus = comp;
+  }
+
+  function kick(t, p) {
+    var o = ac.createOscillator(), g = ac.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(150 * p, t);
+    o.frequency.exponentialRampToValueAtTime(36, t + 0.15);
+    g.gain.setValueAtTime(0.68 * p, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.26);
+    o.connect(g); g.connect(bus);
+    o.start(t); o.stop(t + 0.27);
+  }
+
+  function noiseHit(t, dur, freq, type, vol) {
+    var n = Math.floor(ac.sampleRate * dur);
+    var b = ac.createBuffer(1, n, ac.sampleRate);
+    var d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.exp(-i / (n * 0.3));
+    var s = ac.createBufferSource(); s.buffer = b;
+    var f = ac.createBiquadFilter(); f.type = type; f.frequency.value = freq;
+    var g = ac.createGain();
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    s.connect(f); f.connect(g); g.connect(bus);
+    s.start(t);
+  }
+
+  function synthNote(t, midi, wave, cut, dur, vol) {
+    var o = ac.createOscillator(), f = ac.createBiquadFilter(), g = ac.createGain();
+    o.type = wave;
+    o.frequency.setValueAtTime(m2f(midi), t);
+    f.type = "lowpass";
+    f.frequency.setValueAtTime(cut, t);
+    f.frequency.exponentialRampToValueAtTime(160, t + dur);
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.connect(f); f.connect(g); g.connect(bus);
+    o.start(t); o.stop(t + dur + 0.02);
+  }
+
+  function padChord(t, notes, dur, vol) {
+    for (var i = 0; i < notes.length; i++) {
+      var o = ac.createOscillator(), f = ac.createBiquadFilter(), g = ac.createGain();
+      o.type = (i % 2 === 0) ? "sawtooth" : "triangle";
+      o.frequency.setValueAtTime(m2f(notes[i]) * (1 + (i - 1.5) * 0.0025), t);
+      f.type = "lowpass"; f.frequency.value = 1800;
+      g.gain.setValueAtTime(0.001, t);
+      g.gain.linearRampToValueAtTime(vol, t + 0.15);
+      g.gain.setValueAtTime(vol, t + dur - 0.3);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.connect(f); f.connect(g); g.connect(bus);
+      o.start(t); o.stop(t + dur + 0.04);
+    }
+  }
+
+  var ROOTS = [38, 34, 41, 36];
+  var CHORDS = [[50,57,62,65], [46,53,58,62], [53,60,65,69], [48,55,60,64]];
+  var ARP = [0, 7, 12, 15, 19, 15, 12, 7];
+
+  function schedStep(stepIdx, when) {
+    var beat = Math.floor(stepIdx / 4);
+    var sub = stepIdx % 4;
+    var bar = Math.floor(beat / 4);
+
+    if (beat >= 100) {
+      if (stepIdx === 100 * 4) {
+        kick(when, 1.3);
+        noiseHit(when, 0.16, 1800, "bandpass", 0.34);
+        padChord(when, [38, 50, 57, 62, 64, 69], 3.4, 0.095);
+      }
+      if (sub === 0 && beat < 106 && beat % 2 === 0) {
+        synthNote(when, 74 + (beat - 100) * 2, "triangle", 3600, 0.22, 0.09);
+      }
+      return;
+    }
+
+    var pIdx = bar % 4;
+    var root = ROOTS[pIdx];
+    var drive = beat < 16 ? 0.58 : (beat < 46 ? 0.84 : (beat < 88 ? 1.02 : 1.2));
+
+    if (sub === 0) kick(when, (beat % 8 === 0) ? 1.2 : 0.96);
+    else if (sub === 3 && beat % 8 === 7 && beat >= 15) kick(when, 0.72);
+
+    if (beat >= 8 && sub === 0 && beat % 2 === 1) noiseHit(when, 0.13, 1900, "bandpass", 0.25 * drive);
+    if (beat >= 4) noiseHit(when, sub === 2 ? 0.08 : 0.032, 7600, "highpass", sub === 2 ? 0.12 : 0.065);
+
+    if (sub !== 0 || beat < 8) {
+      synthNote(when, root + (sub === 2 && beat >= 16 ? 12 : 0), "sawtooth", 420 + drive * 520, 0.10, 0.21);
+    }
+    var note = root + 24 + ARP[stepIdx % 8] + (beat >= 88 ? 12 : 0);
+    synthNote(when, note, "sawtooth", 1600 + drive * 1900, 0.15, 0.095 * drive);
+
+    if (beat >= 16 && stepIdx % 16 === 0) {
+      padChord(when, CHORDS[pIdx], BEAT * 4, beat >= 88 ? 0.085 : 0.055);
+    }
+  }
+
+  var PT = [
+    [1,"H",1,1,1],[2,"He",1,18,0],
+    [3,"Li",2,1,1],[4,"Be",2,2,1],[5,"B",2,13,1],[6,"C",2,14,1],[7,"N",2,15,1],[8,"O",2,16,1],[9,"F",2,17,1],[10,"Ne",2,18,0],
+    [11,"Na",3,1,1],[12,"Mg",3,2,1],[13,"Al",3,13,1],[14,"Si",3,14,1],[15,"P",3,15,1],[16,"S",3,16,1],[17,"Cl",3,17,1],[18,"Ar",3,18,0],
+    [19,"K",4,1,1],[20,"Ca",4,2,1],[21,"Sc",4,3,1],[22,"Ti",4,4,1],[23,"V",4,5,1],[24,"Cr",4,6,1],[25,"Mn",4,7,1],[26,"Fe",4,8,1],[27,"Co",4,9,1],[28,"Ni",4,10,1],[29,"Cu",4,11,1],[30,"Zn",4,12,1],[31,"Ga",4,13,1],[32,"Ge",4,14,1],[33,"As",4,15,1],[34,"Se",4,16,1],[35,"Br",4,17,1],[36,"Kr",4,18,1],
+    [37,"Rb",5,1,1],[38,"Sr",5,2,1],[39,"Y",5,3,1],[40,"Zr",5,4,1],[41,"Nb",5,5,1],[42,"Mo",5,6,1],[43,"Tc",5,7,1],[44,"Ru",5,8,1],[45,"Rh",5,9,1],[46,"Pd",5,10,1],[47,"Ag",5,11,1],[48,"Cd",5,12,1],[49,"In",5,13,1],[50,"Sn",5,14,1],[51,"Sb",5,15,1],[52,"Te",5,16,1],[53,"I",5,17,1],[54,"Xe",5,18,1],
+    [55,"Cs",6,1,1],[56,"Ba",6,2,1],[57,"La",6,3,1],[72,"Hf",6,4,1],[73,"Ta",6,5,1],[74,"W",6,6,1],[75,"Re",6,7,1],[76,"Os",6,8,1],[77,"Ir",6,9,1],[78,"Pt",6,10,1],[79,"Au",6,11,1],[80,"Hg",6,12,1],[81,"Tl",6,13,1],[82,"Pb",6,14,1],[83,"Bi",6,15,1],[84,"Po",6,16,0],[85,"At",6,17,0],[86,"Rn",6,18,0],
+    [87,"Fr",7,1,0],[88,"Ra",7,2,0],[89,"Ac",7,3,1],
+    [58,"Ce",8,4,1],[59,"Pr",8,5,1],[60,"Nd",8,6,1],[61,"Pm",8,7,1],[62,"Sm",8,8,1],[63,"Eu",8,9,1],[64,"Gd",8,10,1],[65,"Tb",8,11,1],[66,"Dy",8,12,1],[67,"Ho",8,13,1],[68,"Er",8,14,1],[69,"Tm",8,15,1],[70,"Yb",8,16,1],[71,"Lu",8,17,1],
+    [90,"Th",9,4,1],[91,"Pa",9,5,1],[92,"U",9,6,1],[93,"Np",9,7,1],[94,"Pu",9,8,1]
+  ];
+
+  var SHOTS = [
+    { b0:0,  b1:8,   act:"ACT 01 · GENESIS", title:"2022.11.28 · M3GNet 开启元素周期表通用势纪元",
+      tel:"[2022.11.28] M3GNet (Chen & Ong, Nat. Comput. Sci. 2, 718-728) | 89 Elements | MPF.2021.2.8 (187.7k DFT Frames)" },
+    { b0:8,  b1:16,  act:"ACT 01 · GENESIS", title:"显式三体图卷积与保守势自动微分结构弛豫",
+      tel:"[CONSERVATIVE PES] F_i = -dE/dr_i, sigma = V^-1 dE/d_eps | 31M Matterverse Hypothetical Crystals Screened -> 1.8M Candidates" },
+    { b0:16, b1:26,  act:"ACT 02 · SYMMETRY", title:"架构演进 I：标量不变性 vs E(3) 高阶多体与键轴 SO(2) 平滑卷积",
+      tel:"[ARCHITECTURE] Invariant (M3GNet, ORB, PET) vs Equivariant ACE (MACE) & Bond-Aligned SO(2) O(L^3) Smooth Conv (eSEN, DPA-4)" },
+    { b0:26, b1:38,  act:"ACT 02 · PHYSICS", title:"架构演进 II：局域磁矩约束 (CHGNet) 与线性标度电荷平衡 (QET)",
+      tel:"[SPIN & CHARGE] CHGNet Site |mu_i| (Nat. Mach. Intell. 2023) -> QET Analytical O(N) Charge Equilibration (arXiv:2511.07249)" },
+    { b0:38, b1:46,  act:"ACT 02 · SCALING", title:"架构演进 III：四年基座谱系与混合线性专家大原子模型 (UMA / DPA-4)",
+      tel:"[LARGE ATOMISTIC MODELS] Meta FAIR UMA MoLE (1.4B Total / ~50M Active Params) + Global (Q, 2S+1) Conditioning" },
+    { b0:46, b1:58,  act:"ACT 03 · DATA SCALE", title:"数据革命 I：规模跨越 2,600 倍与非平衡采样攻克势能面软化 (OMat24)",
+      tel:"[OMat24 · 118M DFT] Rattled Boltzmann + AIMD Sampling Eliminates Systematic PES Softening Bias (>400M Core-Hours)" },
+    { b0:58, b1:68,  act:"ACT 03 · DATA QUALITY", title:"数据革命 II：DIRECT 两阶段分层采样与 r²SCAN 高阶泛函基准 (MatPES)",
+      tel:"[MatPES 2025.1 -> 2025.2] 281M MD Frames (16B Env) -> ~400K DIRECT Structures | r2SCAN (17 Exact Constraints) + Bader/DDEC6" },
+    { b0:68, b1:80,  act:"ACT 04 · AI4S IMPACT", title:"领域贡献：百万原子动力学加速、热力学凸包高通量筛选与非谐声子输运",
+      tel:"[AI FOR SCIENCE] O(N_e^3) -> O(N) MD Speedup (10^4-10^6x) | Stability DAF > 6x (380k GNoME Hull) | BTE Thermal kappa_L" },
+    { b0:80, b1:88,  act:"ACT 04 · ECOSYSTEM", title:"研究爆发：公开参评通用势激增逾 16 倍与全栈分子模拟生态成型",
+      tel:"[COMMUNITY SURGE] Open Force-Field UIPs: 1 (2022) -> 3 (2023) -> 17 (2024) -> 49 UIPs / 58 Models (2026) | 1,000+ Citations" },
+    { b0:88, b1:100, act:"ACT 05 · BENCHMARK", title:"Matbench Discovery：基于 DFT 参考凸包的多任务权威客观评测总览",
+      tel:"[MATBENCH DISCOVERY] Riebesell et al., Nat. Mach. Intell. 7, 836-847 (2025) | CPS = 50% F1 + 40% kappa_SRME + 10% RMSD" },
+    { b0:100,b1:108, act:"FINALE · 4 YEARS", title:"2022.11.28 — 2026.11.28 · 机器学习力场基座势函数四周年致敬",
+      tel:"[2022.11.28 — 2026.11.28] FOUR YEARS OF MLFF FOUNDATIONAL POTENTIALS · TRIBUTE TO OPEN ATOMISTIC SCIENCE" }
+  ];
+
+  function panel(x, y, w, h, accent, tag, rightTag) {
+    ctx.fillStyle = "rgba(11,16,25,0.88)";
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = C.line;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(x, y, w, h);
+    ctx.fillStyle = accent || C.orange;
+    ctx.fillRect(x, y, 16, 3);
+    ctx.fillRect(x, y, 3, 16);
+    if (tag) {
+      ctx.font = "700 14px " + MONO;
+      ctx.fillStyle = accent || C.orange;
+      ctx.textAlign = "left";
+      ctx.fillText(tag, x + 22, y + 28);
+    }
+    if (rightTag) {
+      ctx.font = "500 13px " + MONO;
+      ctx.fillStyle = C.muted;
+      ctx.textAlign = "right";
+      ctx.fillText(rightTag, x + w - 22, y + 28);
+    }
+    ctx.textAlign = "left";
+  }
+
+  function arrow(x1, y1, x2, y2, col, lw) {
+    var ang = Math.atan2(y2 - y1, x2 - x1);
+    ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = lw || 3;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - 11 * Math.cos(ang - 0.35), y2 - 11 * Math.sin(ang - 0.35));
+    ctx.lineTo(x2 - 11 * Math.cos(ang + 0.35), y2 - 11 * Math.sin(ang + 0.35));
+    ctx.closePath(); ctx.fill();
+  }
+
+  function drawGridAndHUD(t, beatFloat, shot, flash) {
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 0, 1920, 1080);
+
+    ctx.strokeStyle = "rgba(255,255,255,0.028)";
+    ctx.lineWidth = 1;
+    var i;
+    for (i = 0; i <= 1920; i += 48) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 1080); ctx.stroke(); }
+    for (i = 0; i <= 1080; i += 48) { ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(1920, i); ctx.stroke(); }
+
+    ctx.fillStyle = "rgba(7,10,16,0.94)";
+    ctx.fillRect(0, 0, 1920, 74);
+    ctx.strokeStyle = C.line;
+    ctx.beginPath(); ctx.moveTo(0, 74); ctx.lineTo(1920, 74); ctx.stroke();
+
+    ctx.fillStyle = C.orange;
+    ctx.fillRect(38, 19, 195, 34);
+    ctx.font = "800 14px " + MONO;
+    ctx.fillStyle = "#05070b";
+    ctx.fillText(shot.act, 50, 41);
+
+    ctx.font = "800 21px " + SANS;
+    ctx.fillStyle = C.ink;
+    ctx.fillText(shot.title, 250, 44, 865);
+
+    var bx = 1135, by = 46, bw = 425;
+    ctx.fillStyle = "rgba(255,255,255,0.12)";
+    ctx.fillRect(bx, by, bw, 5);
+    var grad = ctx.createLinearGradient(bx, 0, bx + bw, 0);
+    grad.addColorStop(0, C.orange); grad.addColorStop(0.5, C.gold); grad.addColorStop(1, C.cyan);
+    ctx.fillStyle = grad;
+    ctx.fillRect(bx, by, bw * (t / DUR), 5);
+    ctx.font = "600 12px " + MONO;
+    ctx.fillStyle = C.muted;
+    ctx.fillText("2022.11.28", bx, 36);
+    ctx.fillText("2024", bx + 192, 36);
+    ctx.fillText("2026.11.28", bx + bw - 78, 36);
+
+    var m = Math.floor(t / 60), s = Math.floor(t % 60), f = Math.floor((t % 1) * 60);
+    var tc = "00:" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + (f < 10 ? "0" + f : f);
+    ctx.font = "700 15px " + MONO;
+    ctx.fillStyle = C.cyan;
+    ctx.textAlign = "right";
+    ctx.fillText("BEAT " + String(Math.min(108, Math.floor(beatFloat) + 1)).padStart(3, "0") + "/108  |  " + tc, 1882, 43);
+    ctx.textAlign = "left";
+
+    if (flash > 0.005) {
+      ctx.fillStyle = "rgba(255,255,255," + flash.toFixed(3) + ")";
+      ctx.fillRect(0, 74, 1920, 958);
+    }
+  }
+
+  function drawShot1(p) {
+    panel(38, 96, 585, 912, C.orange, "ORIGIN MILESTONE", "Nat. Comput. Sci. 2, 718 (2022)");
+    ctx.font = "900 78px " + MONO;
+    ctx.fillStyle = C.orange;
+    ctx.fillText("2022.11.28", 64, 212, 530);
+
+    ctx.font = "900 44px " + SANS;
+    ctx.fillStyle = C.ink;
+    ctx.fillText("M3GNet 上线", 64, 286);
+    ctx.fillText("通用势基座元年开启", 64, 342);
+
+    ctx.font = "400 19px " + SANS;
+    ctx.fillStyle = C.muted;
+    ctx.fillText("基于 Materials Project 十年 DFT 结构弛豫轨迹，", 64, 404, 530);
+    ctx.fillText("首次用单一图神经网络统一描述横跨周期表", 64, 434, 530);
+    ctx.fillText("89 种化学元素的多体原子间相互作用。", 64, 464, 530);
+
+    var litTarget = Math.floor(easeOut(p * 1.25) * 89);
+    var stats = [
+      [String(litTarget) + " / 89", "ACTIVE PERIODIC TABLE ELEMENTS", C.cyan],
+      [(easeOut(p * 1.25) * 187.7).toFixed(1) + " K", "MPF.2021.2.8 RELAXATION FRAMES", C.orange],
+      ["f = -∇E , σ = V⁻¹∂E/∂ε", "AUTO-DIFFERENTIATION CONSERVATIVE FORCES", C.gold]
+    ];
+    for (var i = 0; i < stats.length; i++) {
+      var sy = 535 + i * 142;
+      ctx.fillStyle = "rgba(255,255,255,0.03)";
+      ctx.fillRect(64, sy, 532, 118);
+      ctx.fillStyle = stats[i][2];
+      ctx.fillRect(64, sy, 5, 118);
+      ctx.font = "800 34px " + MONO;
+      ctx.fillStyle = C.ink;
+      ctx.fillText(stats[i][0], 88, sy + 56, 490);
+      ctx.font = "600 14px " + MONO;
+      ctx.fillStyle = C.muted;
+      ctx.fillText(stats[i][1], 88, sy + 92, 490);
+    }
+
+    panel(648, 96, 1234, 912, C.cyan, "UNIVERSAL PERIODIC TABLE COVERAGE MATRIX", "CHEN & ONG · UC SAN DIEGO");
+    ctx.font = "800 28px " + SANS;
+    ctx.fillStyle = C.ink;
+    ctx.fillText("单模型横跨 89 种元素 · 零重训练全周期表迁移", 674, 168);
+
+    var ox = 676, oy = 212, cw = 63, ch = 72, gap = 3;
+    var activeCount = 0;
+    for (var k = 0; k < PT.length; k++) {
+      var el = PT[k];
+      var x = ox + (el[3] - 1) * (cw + gap);
+      var y = oy + (el[2] - 1) * (ch + gap) + (el[2] >= 8 ? 18 : 0);
+      var isLit = false, isHot = false;
+      if (el[4] === 1) {
+        activeCount++;
+        isLit = activeCount <= litTarget;
+        isHot = isLit && (activeCount > litTarget - 4) && p < 0.86;
+      }
+      ctx.fillStyle = isHot ? C.orange : (isLit ? "rgba(0,212,182,0.20)" : "rgba(255,255,255,0.025)");
+      ctx.fillRect(x, y, cw, ch);
+      ctx.strokeStyle = isHot ? "#fff" : (isLit ? C.cyan : "rgba(255,255,255,0.10)");
+      ctx.lineWidth = isLit ? 1.6 : 1;
+      ctx.strokeRect(x, y, cw, ch);
+
+      ctx.font = "600 11px " + MONO;
+      ctx.fillStyle = isHot ? "#000" : (isLit ? C.cyan : "rgba(255,255,255,0.25)");
+      ctx.fillText(String(el[0]), x + 6, y + 16);
+
+      ctx.font = "800 20px " + MONO;
+      ctx.fillStyle = isHot ? "#000" : (isLit ? "#fff" : "rgba(255,255,255,0.22)");
+      ctx.textAlign = "center";
+      ctx.fillText(el[1], x + cw / 2, y + 48);
+      ctx.textAlign = "left";
+    }
+    ctx.font = "600 15px " + MONO;
+    ctx.fillStyle = C.gold;
+    ctx.fillText("SPECIES EMBEDDING Z_i -> MANY-BODY GRAPH INTERACTION -> UNIVERSAL INTERATOMIC POTENTIAL", 676, 974, 1180);
+  }
+
+  function drawShot2(p) {
+    panel(38, 96, 950, 912, C.cyan, "EXPLICIT 3-BODY GRAPH & UNIT-CELL RELAXATION", "r_c = 5.0 Å CUTOFF");
+    var relax = easeOut(p * 1.3);
+    var rot = p * 1.8 + 0.45;
+    var cx = 510, cy = 515;
+
+    ctx.strokeStyle = "rgba(0,212,182,0.28)";
+    ctx.setLineDash([8, 6]);
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx, cy, 295, 0, Math.PI * 2); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font = "600 15px " + MONO;
+    ctx.fillStyle = C.cyan;
+    ctx.fillText("Spherical Bessel + Legendre Basis j_l(z_ln r_ij / r_c) Y_l^0(θ_jik)", 66, 158, 890);
+
+    var vib = (1 - relax) * 34 * Math.sin(p * 32);
+    var nodes = [
+      [0, 0, 0, "Center i", C.orange, 34],
+      [-1.15, -0.75, 0.5, "Atom j", C.cyan, 25],
+      [1.18, -0.68, -0.4, "Atom k", C.cyan, 25],
+      [0.15, 1.25, 0.7, "Atom l", C.blue, 23],
+      [-0.95, 0.85, -0.8, "Atom m", C.gold, 21],
+      [1.05, 0.82, 0.6, "Atom n", C.gold, 21]
+    ];
+    var proj = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var nx = nodes[i][0] * 175 + (i > 0 ? vib * (i % 2 ? 1 : -1) : 0);
+      var ny = nodes[i][1] * 175 + (i > 0 ? vib * 0.6 : 0);
+      var nz = nodes[i][2] * 140;
+      var rx = nx * Math.cos(rot) - nz * Math.sin(rot);
+      var rz = nx * Math.sin(rot) + nz * Math.cos(rot);
+      proj.push({ x: cx + rx, y: cy + ny, z: rz, lbl: nodes[i][3], col: nodes[i][4], r: nodes[i][5] });
+    }
+
+    for (i = 1; i < proj.length; i++) {
+      ctx.strokeStyle = i <= 2 ? C.cyan : "rgba(255,255,255,0.28)";
+      ctx.lineWidth = i <= 2 ? 4 : 2;
+      ctx.beginPath(); ctx.moveTo(proj[0].x, proj[0].y); ctx.lineTo(proj[i].x, proj[i].y); ctx.stroke();
+      if (1 - relax > 0.06) {
+        arrow(proj[i].x, proj[i].y, proj[i].x + (cx - proj[i].x) * 0.28 * (1 - relax), proj[i].y + (cy - proj[i].y) * 0.28 * (1 - relax), C.orange, 3);
+      }
+    }
+
+    ctx.strokeStyle = C.gold; ctx.lineWidth = 3.5;
+    var a1 = Math.atan2(proj[1].y - cy, proj[1].x - cx);
+    var a2 = Math.atan2(proj[2].y - cy, proj[2].x - cx);
+    ctx.beginPath(); ctx.arc(cx, cy, 92, a1, a2, false); ctx.stroke();
+    var th = (109.47 + (1 - relax) * 13.5 * Math.cos(p * 25)).toFixed(1);
+    ctx.font = "800 20px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("3-Body Angle θ_jik = " + th + "°", cx - 150, cy - 112);
+
+    for (i = 0; i < proj.length; i++) {
+      ctx.fillStyle = proj[i].col;
+      ctx.beginPath(); ctx.arc(proj[i].x, proj[i].y, proj[i].r, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.font = "700 14px " + MONO; ctx.fillStyle = "#fff";
+      ctx.fillText(proj[i].lbl, proj[i].x - 32, proj[i].y + proj[i].r + 22);
+    }
+
+    var fmax = (1.92 * Math.exp(-4.8 * relax) + 0.009).toFixed(3);
+    ctx.fillStyle = "rgba(5,8,14,0.92)";
+    ctx.fillRect(66, 902, 894, 76);
+    ctx.strokeStyle = C.line; ctx.strokeRect(66, 902, 894, 76);
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("FIRE/BFGS STEP " + Math.floor(relax * 45) + "/45  |  max|F_i| = " + fmax + " eV/Å  |  CONVERGED TO LOCAL MINIMUM", 88, 946, 850);
+
+    panel(1012, 96, 870, 912, C.orange, "END-TO-END DIFFERENTIABLE AUTOGRAD PIPELINE", "MATTERVERSE HTVS");
+    var boxes = [
+      [1052, 165, 790, 112, C.blue, "1. CRYSTAL GRAPH INPUT G = ({Z_i}, {r_i}, Lattice L, Strain ε)", "Periodic boundary conditions + radial/angular 3-body basis expansion", ""],
+      [1052, 325, 790, 118, C.cyan, "2. MESSAGE PASSING BLOCKS -> TOTAL POTENTIAL ENERGY E = ∑_i E_i", "Extensive, permutation & rotation invariant scalar energy surface", ""],
+      [1052, 492, 380, 145, C.orange, "F_i = - ∂E / ∂r_i", "Exact conservative atomic forces", "via reverse-mode autograd"],
+      [1462, 492, 380, 145, C.gold, "σ = V⁻¹ ∂E / ∂ε", "Virial stress tensor for", "simultaneous cell relaxation"]
+    ];
+    for (i = 0; i < boxes.length; i++) {
+      var b = boxes[i];
+      ctx.fillStyle = "rgba(255,255,255,0.03)"; ctx.fillRect(b[0], b[1], b[2], b[3]);
+      ctx.strokeStyle = b[4]; ctx.lineWidth = 2; ctx.strokeRect(b[0], b[1], b[2], b[3]);
+      ctx.font = "800 19px " + MONO; ctx.fillStyle = b[4];
+      ctx.fillText(b[5], b[0] + 22, b[1] + 44, b[2] - 40);
+      ctx.font = "500 15px " + SANS; ctx.fillStyle = C.ink;
+      ctx.fillText(b[6], b[0] + 22, b[1] + 82, b[2] - 40);
+      if (b[7]) ctx.fillText(b[7], b[0] + 22, b[1] + 108, b[2] - 40);
+    }
+    arrow(1447, 277, 1447, 322, C.cyan, 3);
+    arrow(1290, 443, 1242, 488, C.orange, 3);
+    arrow(1605, 443, 1652, 488, C.gold, 3);
+
+    ctx.fillStyle = "rgba(255,79,23,0.09)"; ctx.fillRect(1052, 686, 790, 290);
+    ctx.strokeStyle = C.orange; ctx.strokeRect(1052, 686, 790, 290);
+    ctx.font = "900 58px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText(Math.round(easeOut(p * 1.3) * 31) + ",000,000+", 1084, 778);
+    ctx.font = "700 17px " + MONO; ctx.fillStyle = C.orange;
+    ctx.fillText("HYPOTHETICAL INORGANIC CRYSTALS RELAXED BY M3GNet (MATTERVERSE)", 1084, 818, 730);
+    ctx.font = "800 32px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("-> " + (easeOut(p * 1.3) * 1.8).toFixed(1) + "M Potentially Stable Candidates Identified", 1084, 886, 730);
+    ctx.font = "500 16px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("Orders-of-magnitude faster pre-screening before DFT verification", 1084, 934, 730);
+  }
+
+  function drawShot3(p) {
+    var ang = p * Math.PI * 1.75;
+    var deg = Math.round((ang * 180 / Math.PI) % 360);
+
+    panel(38, 96, 905, 912, C.orange, "PARADIGM A · O(3) INVARIANT / UNCONSTRAINED", "M3GNet · ORB v3 · MatRIS · PET-OAM-XL");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("标量不变性架构：f(R · X) = f(X)", 66, 166, 845);
+    ctx.font = "400 17px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("内部特征仅编码旋转不变标量 (r_ij, θ_jik) 或直接注意力，无 CG 张量积开销，吞吐极高。", 66, 200, 845);
+
+    var cx1 = 275, cy1 = 465;
+    ctx.strokeStyle = C.dim; ctx.beginPath(); ctx.arc(cx1, cy1, 145, 0, Math.PI * 2); ctx.stroke();
+    var xA = cx1 + 145 * Math.cos(ang), yA = cy1 + 145 * Math.sin(ang);
+    var xB = cx1 + 145 * Math.cos(ang + 1.92), yB = cy1 + 145 * Math.sin(ang + 1.92);
+    ctx.strokeStyle = C.orange; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(cx1, cy1); ctx.lineTo(xA, yA); ctx.moveTo(cx1, cy1); ctx.lineTo(xB, yB); ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx1, cy1, 22, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = C.orange;
+    ctx.beginPath(); ctx.arc(xA, yA, 17, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(xB, yB, 17, 0, Math.PI * 2); ctx.fill();
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("ROTATION φ = " + deg + "°  |  r_ij = CONST, θ = CONST", 76, 665, 420);
+
+    ctx.strokeStyle = C.orange; ctx.strokeRect(520, 255, 390, 420);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.orange;
+    ctx.fillText("INVARIANT L=0 SCALAR CHANNELS", 544, 294);
+    var vals = [0.86, 0.52, 0.94, 0.67, 0.41, 0.79];
+    for (var i = 0; i < vals.length; i++) {
+      ctx.fillStyle = "rgba(255,79,23,0.85)";
+      ctx.fillRect(544, 326 + i * 54, vals[i] * 330, 28);
+      ctx.font = "600 13px " + MONO; ctx.fillStyle = C.ink;
+      ctx.fillText("h_i^(0)[" + i + "] = " + vals[i].toFixed(2) + " (UNCHANGED)", 552, 345 + i * 54);
+    }
+
+    ctx.fillStyle = "rgba(255,255,255,0.03)"; ctx.fillRect(66, 718, 845, 258);
+    ctx.strokeStyle = C.line; ctx.strokeRect(66, 718, 845, 258);
+    ctx.font = "800 19px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("HIGH-THROUGHPUT SCALABLE LINEAGE:", 90, 762);
+    ctx.font = "600 15px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("• M3GNet (2022) -> Explicit 3-body spherical-Bessel graph", 90, 804, 800);
+    ctx.fillText("• ORB v2 / v3 (2024-25) -> Smooth regularized scalable GNN", 90, 842, 800);
+    ctx.fillText("• PET-MAD / PET-OAM-XL (2025-26) -> 730M Point-Edge Transformer", 90, 880, 800);
+    ctx.fillStyle = C.muted;
+    ctx.fillText("Learns rotational symmetry via rotational augmentation & 10^8-scale data.", 90, 932, 800);
+
+    panel(977, 96, 905, 912, C.cyan, "PARADIGM B · E(3) EQUIVARIANT & BOND-ALIGNED SO(2)", "NequIP -> MACE -> SevenNet -> eSEN -> DPA-4");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("高阶张量等变：F(R · X) = D^(ℓ)(R) F(X)", 1005, 166, 845);
+    ctx.font = "400 17px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("球谐张量随晶体严格协变旋转；键轴对齐将 SO(3) 张量积降维至 SO(2) O(L³) 平滑卷积。", 1005, 200, 845);
+
+    var cx2 = 1205, cy2 = 455;
+    ctx.beginPath();
+    for (var a = 0; a <= Math.PI * 2 + 0.05; a += 0.04) {
+      var lobe = Math.abs(Math.cos(2 * (a - ang)));
+      var rad = 32 + 132 * lobe;
+      var px = cx2 + rad * Math.cos(a), py = cy2 + rad * Math.sin(a);
+      if (a === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.fillStyle = "rgba(0,212,182,0.24)"; ctx.fill();
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 3; ctx.stroke();
+    ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx2, cy2, 16, 0, Math.PI * 2); ctx.fill();
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("Y_ℓ^m(r̂_ij) CO-ROTATES EXACTLY: D^(2)(R)", 1012, 665, 405);
+
+    ctx.fillStyle = "rgba(56,139,253,0.08)"; ctx.fillRect(1435, 255, 418, 195);
+    ctx.strokeStyle = C.blue; ctx.strokeRect(1435, 255, 418, 195);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.blue;
+    ctx.fillText("1. MACE: HIGHER-ORDER ACE (ν-BODY)", 1455, 292, 380);
+    ctx.font = "600 15px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("B_i^(ν) = ∏_(ξ=1)^ν ∑_j R(r_ij) Y_ℓ^m", 1455, 332, 380);
+    ctx.fillStyle = C.gold;
+    ctx.fillText("Captures 4-body+ in just 2 MP layers!", 1455, 370, 380);
+    ctx.fillStyle = C.muted;
+    ctx.fillText("SevenNet: Spatial multi-GPU LAMMPS", 1455, 410, 380);
+
+    ctx.fillStyle = "rgba(0,212,182,0.08)"; ctx.fillRect(1435, 475, 418, 200);
+    ctx.strokeStyle = C.cyan; ctx.strokeRect(1435, 475, 418, 200);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("2. eqV2 / eSEN / DPA-4: SO(2) CONV", 1455, 512, 380);
+    ctx.fillStyle = "rgba(255,51,85,0.28)"; ctx.fillRect(1455, 532, 360, 28);
+    ctx.font = "700 14px " + MONO; ctx.fillStyle = "#ff99aa";
+    ctx.fillText("SO(3) Tensor Product: O(L^6)", 1465, 551);
+    ctx.fillStyle = "rgba(0,212,182,0.38)"; ctx.fillRect(1455, 570, 195, 28);
+    ctx.fillStyle = "#fff";
+    ctx.fillText("SO(2) z∥r̂_ij: O(L^3)!", 1465, 589);
+    ctx.fillStyle = C.muted;
+    ctx.fillText("Smooth gates -> Exact Hessian ∇²E", 1455, 642, 380);
+
+    ctx.fillStyle = "rgba(0,212,182,0.07)"; ctx.fillRect(1005, 718, 848, 258);
+    ctx.strokeStyle = C.cyan; ctx.strokeRect(1005, 718, 848, 258);
+    ctx.font = "800 19px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("KEY EQUIVARIANT BREAKTHROUGHS (2023 -> 2026):", 1030, 762);
+    ctx.font = "600 15px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("• MACE-MP-0 (2023.12): Stable solid/liquid/gas/interface MD out-of-the-box", 1030, 804, 800);
+    ctx.fillText("• eSEN (ICML'25 Spotlight): Conservative smooth SO(2) -> Phonon κ_SRME leap", 1030, 842, 800);
+    ctx.fillText("• DPA-4 (2026): EMFA Multi-Focus SO(2) + analytic ZBL core repulsion", 1030, 880, 800);
+    ctx.fillStyle = C.gold;
+    ctx.fillText("Unlocks high-order PES derivatives (2nd & 3rd IFCs) without numerical noise.", 1030, 932, 800);
+  }
+
+  function drawShot4(p) {
+    var hop = 0.5 - 0.5 * Math.cos(p * Math.PI * 2);
+
+    panel(38, 96, 875, 912, C.gold, "SPIN & MAGNETIC MOMENT REGULARIZATION", "CHGNet · Nat. Mach. Intell. 5, 1031 (2023.09)");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("CHGNet：显式监督原子磁矩 |μ_i| 捕获异价态演化", 66, 166, 818);
+    ctx.font = "400 17px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("仅靠原子坐标无法区分同构异价离子；MPtrj 158 万帧自旋极化磁矩赋予模型潜空间电荷态感知。", 66, 200, 818);
+
+    ctx.fillStyle = "rgba(255,184,0,0.05)"; ctx.fillRect(66, 232, 818, 430);
+    ctx.strokeStyle = "rgba(255,184,0,0.4)"; ctx.strokeRect(66, 232, 818, 430);
+
+    var feAx = 265, feBx = 665, feY = 465;
+    ctx.strokeStyle = C.dim; ctx.setLineDash([8, 6]);
+    ctx.beginPath(); ctx.moveTo(feAx, feY); ctx.lineTo(feBx, feY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    var liX = lerp(feAx, feBx, hop);
+    arrow(feAx + 45, 325, feBx - 45, 325, "rgba(255,79,23,0.45)", 2);
+    ctx.fillStyle = C.orange;
+    ctx.beginPath(); ctx.arc(liX, 325, 24, 0, Math.PI * 2); ctx.fill();
+    ctx.font = "900 16px " + MONO; ctx.fillStyle = "#000";
+    ctx.fillText("Li⁺", liX - 15, 331);
+
+    var mA = (3.95 + 0.95 * hop).toFixed(2);
+    var mB = (4.90 - 0.95 * hop).toFixed(2);
+    ctx.fillStyle = "rgba(255,184,0,0.18)";
+    ctx.beginPath(); ctx.arc(feAx, feY, 48, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = C.gold; ctx.lineWidth = 3; ctx.stroke();
+    arrow(feAx, feY + 42, feAx, feY - 68 - hop * 32, C.gold, 5);
+
+    ctx.fillStyle = "rgba(0,212,182,0.18)";
+    ctx.beginPath(); ctx.arc(feBx, feY, 48, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 3; ctx.stroke();
+    arrow(feBx, feY + 42, feBx, feY - 100 + hop * 32, C.cyan, 5);
+
+    ctx.font = "800 19px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("Fe Site A: |μ_A| = " + mA + " μ_B", 130, 566);
+    ctx.fillText("Fe Site B: |μ_B| = " + mB + " μ_B", 530, 566);
+    ctx.font = "700 17px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText(hop > 0.5 ? "Oxidized -> Fe³⁺ (3d⁵)" : "Reduced -> Fe²⁺ (3d⁶)", 145, 602);
+    ctx.fillStyle = C.cyan;
+    ctx.fillText(hop > 0.5 ? "Reduced -> Fe²⁺ (3d⁶)" : "Oxidized -> Fe³⁺ (3d⁵)", 545, 602);
+
+    ctx.fillStyle = "rgba(255,255,255,0.03)"; ctx.fillRect(66, 692, 818, 284);
+    ctx.strokeStyle = C.line; ctx.strokeRect(66, 692, 818, 284);
+    ctx.font = "800 19px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("LATENT VALENCE REGULARIZATION (Deng et al., Ceder Lab):", 92, 736);
+
+    ctx.fillStyle = "rgba(255,255,255,0.05)"; ctx.fillRect(92, 766, 255, 66);
+    ctx.strokeStyle = C.gold; ctx.strokeRect(92, 766, 255, 66);
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = "#fff";
+    ctx.fillText("Atom Embedding v_i^(L)", 106, 805);
+
+    arrow(347, 784, 415, 774, C.gold, 2.5);
+    arrow(347, 814, 415, 824, C.cyan, 2.5);
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("|μ_i| = MLP_mag(v_i^(L))  [Spin Constraint]", 428, 780, 440);
+    ctx.fillStyle = C.cyan;
+    ctx.fillText("E_tot = ∑_i MLP_E(v_i^(L)) -> Conservative F_i, σ", 428, 830, 440);
+
+    ctx.font = "600 16px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("Tracks coupled ion-electron polaron dynamics in Li_xFePO4 & mixed-valence oxides.", 92, 892, 770);
+    ctx.fillStyle = C.cyan;
+    ctx.fillText("Trained on MPtrj: 1.58M Structures · 49M Forces · 14M Magnetic Moments", 92, 936, 770);
+
+    panel(938, 96, 944, 912, C.orange, "QET · LINEAR-SCALING CHARGE-EQUILIBRATED TENSORNET", "Ko, Liu et al., Ong Lab · arXiv:2511.07249");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("QET：解析可解 O(N) 线性电荷平衡与外电势反应模拟", 966, 166, 888);
+    ctx.font = "400 17px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("突破传统 Qeq 稠密矩阵求逆 O(N³) 瓶颈，显式求解原子部分电荷 q_i、长程静电与电化学界面反应。", 966, 200, 888);
+
+    var steps = [
+      [966, 232, 265, 132, C.blue, "O(3) TensorNet", "Rank-2 X_i = I ⊕ A ⊕ S", "Predicts env (χ_i, J_i)"],
+      [1272, 232, 295, 132, C.gold, "Analytical O(N) Qeq", "Closed-form ∑q_i = Q_tot", "Supports external Φ_ext"],
+      [1608, 232, 246, 132, C.cyan, "Reactive Total PES", "E = E_short + E_elec(q*)", "Bader/DDEC6 supervised"]
+    ];
+    for (var s = 0; s < steps.length; s++) {
+      var st = steps[s];
+      ctx.fillStyle = "rgba(255,255,255,0.03)"; ctx.fillRect(st[0], st[1], st[2], st[3]);
+      ctx.strokeStyle = st[4]; ctx.lineWidth = 2; ctx.strokeRect(st[0], st[1], st[2], st[3]);
+      ctx.font = "800 17px " + MONO; ctx.fillStyle = st[4]; ctx.fillText(st[5], st[0] + 16, st[1] + 38, st[2] - 28);
+      ctx.font = "600 14px " + MONO; ctx.fillStyle = C.ink; ctx.fillText(st[6], st[0] + 16, st[1] + 74, st[2] - 28);
+      ctx.fillStyle = C.muted; ctx.fillText(st[7], st[0] + 16, st[1] + 106, st[2] - 28);
+    }
+    arrow(1233, 298, 1268, 298, "#fff", 2.5);
+    arrow(1569, 298, 1604, 298, "#fff", 2.5);
+
+    ctx.fillStyle = "rgba(255,255,255,0.025)"; ctx.fillRect(966, 392, 425, 584);
+    ctx.strokeStyle = C.line; ctx.strokeRect(966, 392, 425, 584);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("SCALING COST vs SYSTEM SIZE N", 990, 432);
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(1015, 895); ctx.lineTo(1360, 895); ctx.moveTo(1015, 895); ctx.lineTo(1015, 475); ctx.stroke();
+
+    ctx.strokeStyle = C.red; ctx.lineWidth = 4; ctx.setLineDash([8, 6]);
+    ctx.beginPath(); ctx.moveTo(1015, 888); ctx.quadraticCurveTo(1165, 860, 1245, 495); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font = "700 15px " + MONO; ctx.fillStyle = C.red;
+    ctx.fillText("Classical Matrix Qeq:", 1032, 535);
+    ctx.fillText("O(N³) Dense Inversion", 1032, 558);
+
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(1015, 888); ctx.lineTo(1352, 765); ctx.stroke();
+    ctx.font = "800 16px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("QET Analytical Qeq: O(N)!", 1095, 868);
+    ctx.font = "600 14px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("Atom Count N (10² -> 10⁶+ Atoms)", 1050, 938);
+
+    var qv = (0.44 + 0.16 * Math.sin(p * Math.PI * 3)).toFixed(2);
+    ctx.fillStyle = "rgba(0,212,182,0.05)"; ctx.fillRect(1414, 392, 440, 584);
+    ctx.strokeStyle = C.cyan; ctx.strokeRect(1414, 392, 440, 584);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("ELECTROCHEMICAL SEI: Li | Li₆PS₅Cl", 1436, 432, 400);
+
+    ctx.fillStyle = "rgba(255,79,23,0.14)"; ctx.fillRect(1438, 468, 175, 250);
+    ctx.strokeStyle = C.orange; ctx.strokeRect(1438, 468, 175, 250);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.orange; ctx.fillText("Li Anode", 1478, 512);
+    ctx.font = "800 22px " + MONO; ctx.fillStyle = "#fff"; ctx.fillText("+" + qv + " e", 1476, 598);
+
+    ctx.fillStyle = "rgba(0,212,182,0.12)"; ctx.fillRect(1655, 468, 175, 250);
+    ctx.strokeStyle = C.cyan; ctx.strokeRect(1655, 468, 175, 250);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.cyan; ctx.fillText("Li₆PS₅Cl", 1696, 512);
+    ctx.font = "800 22px " + MONO; ctx.fillStyle = C.gold; ctx.fillText("-" + qv + " e", 1696, 598);
+
+    arrow(1615, 575, 1652, 575, C.gold, 3.5);
+    ctx.font = "600 15px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("✓ NaCl-CaCl₂ Ionic Liquid Density", 1438, 774, 400);
+    ctx.fillText("✓ Ge₁Sb₂Te₄ Phase-Change Memory", 1438, 814, 400);
+    ctx.fillText("✓ Li/Li₆PS₅Cl Interface & Applied Φ_ext", 1438, 854, 400);
+    ctx.fillStyle = C.gold;
+    ctx.fillText("✓ Prevents spurious Cl⁻-Cl⁻ anion bonding", 1438, 904, 400);
+  }
+
+  function drawShot5(p) {
+    panel(38, 96, 1844, 345, C.orange, "FOUR-YEAR FOUNDATIONAL MODEL LINEAGE (2022.11.28 -> 2026.11.28)", "14 KEY ARCHITECTURAL MILESTONES");
+    var ms = [
+      ["2022.11","M3GNet","3-Body IAP"],["2023.09","CHGNet","Spin |μ_i|"],["2023.11","GNoME","380k Stable"],
+      ["2023.12","MACE-MP-0","Higher ACE"],["2024.05","MatterSim","5000K/1TPa"],["2024.06","SevenNet","Multi-GPU"],
+      ["2024.09","ORB v2/v3","Fast GNN"],["2024.10","eqV2-OMat","118M DFT"],["2025.02","eSEN","Smooth SO(2)"],
+      ["2025.05","UMA","1.4B MoLE"],["2025.11","QET","O(N) Charge"],["2026.01","GRACE-3L","Graph ACE"],
+      ["2026.02","PET-OAM-XL","730M Transf."],["2026.08","DPA-4.1","EMFA SO(2)"]
+    ];
+    var reach = easeOut(p * 1.25) * (ms.length - 1);
+    var lx0 = 135, lx1 = 1785, ly = 278;
+    ctx.strokeStyle = C.dim; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(lx0, ly); ctx.lineTo(lx1, ly); ctx.stroke();
+    ctx.strokeStyle = C.orange; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(lx0, ly); ctx.lineTo(lx0 + (lx1 - lx0) * (reach / (ms.length - 1)), ly); ctx.stroke();
+
+    for (var i = 0; i < ms.length; i++) {
+      var x = lx0 + i * ((lx1 - lx0) / (ms.length - 1));
+      var up = i % 2 === 0;
+      var on = i <= reach + 0.2;
+      var col = i === ms.length - 1 ? C.gold : (on ? C.cyan : C.muted);
+      ctx.strokeStyle = col; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x, ly); ctx.lineTo(x, up ? ly - 64 : ly + 64); ctx.stroke();
+      ctx.fillStyle = on ? C.orange : "#222c3a";
+      ctx.beginPath(); ctx.arc(x, ly, on ? 8 : 5, 0, Math.PI * 2); ctx.fill();
+      ctx.textAlign = "center";
+      ctx.font = "800 15px " + MONO; ctx.fillStyle = on ? "#fff" : C.muted;
+      ctx.fillText(ms[i][1], x, up ? ly - 92 : ly + 90);
+      ctx.font = "600 12px " + MONO; ctx.fillStyle = col;
+      ctx.fillText(ms[i][0] + " · " + ms[i][2], x, up ? ly - 72 : ly + 110);
+    }
+    ctx.textAlign = "left";
+
+    panel(38, 466, 1140, 542, C.cyan, "LARGE ATOMISTIC MODELS · MIXTURE OF LINEAR EXPERTS (MoLE)", "Meta FAIR UMA (2025) · DPA-3 / DPA-4");
+    ctx.font = "800 26px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("稀疏激活混合线性专家：1.4B 总参数容量，单结构推理仅激活 ~50M 参数", 66, 532, 1080);
+
+    ctx.fillStyle = "rgba(56,139,253,0.10)"; ctx.fillRect(72, 575, 250, 380);
+    ctx.strokeStyle = C.blue; ctx.strokeRect(72, 575, 250, 380);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.blue; ctx.fillText("GLOBAL ROUTER INPUT", 94, 618);
+    var rTags = ["Chemical Species {Z_i}", "Total Charge Q", "Spin Multiplicity 2S+1", "DFT Task / Fidelity Head"];
+    for (i = 0; i < rTags.length; i++) {
+      ctx.fillStyle = "rgba(255,255,255,0.04)"; ctx.fillRect(92, 646 + i * 68, 210, 50);
+      ctx.font = "600 14px " + MONO; ctx.fillStyle = C.ink; ctx.fillText(rTags[i], 104, 676 + i * 68, 190);
+    }
+
+    var hotExp = Math.floor((p * 8) % 4);
+    for (i = 0; i < 4; i++) {
+      var ey = 582 + i * 96;
+      var hot = (i === hotExp || i === (hotExp + 1) % 4);
+      ctx.strokeStyle = hot ? C.cyan : C.dim; ctx.lineWidth = hot ? 3.5 : 1.5;
+      ctx.beginPath(); ctx.moveTo(322, 765); ctx.lineTo(445, ey + 36); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(745, ey + 36); ctx.lineTo(855, 765); ctx.stroke();
+      ctx.fillStyle = hot ? "rgba(0,212,182,0.18)" : "rgba(255,255,255,0.025)";
+      ctx.fillRect(445, ey, 300, 72);
+      ctx.strokeStyle = hot ? C.cyan : C.line; ctx.strokeRect(445, ey, 300, 72);
+      ctx.font = "800 16px " + MONO; ctx.fillStyle = hot ? "#fff" : C.muted;
+      ctx.fillText("Linear Expert W_" + (i + 1) + "  (α_" + (i + 1) + ")", 472, ey + 43);
+    }
+
+    ctx.fillStyle = "rgba(255,184,0,0.12)"; ctx.fillRect(855, 615, 290, 300);
+    ctx.strokeStyle = C.gold; ctx.lineWidth = 2.5; ctx.strokeRect(855, 615, 290, 300);
+    ctx.font = "800 18px " + MONO; ctx.fillStyle = C.gold; ctx.fillText("PRE-MERGED WEIGHT W*", 878, 665, 250);
+    ctx.font = "800 22px " + MONO; ctx.fillStyle = "#fff"; ctx.fillText("W* = ∑_e α_e W_e", 892, 718, 240);
+    ctx.font = "700 18px " + MONO; ctx.fillStyle = C.cyan; ctx.fillText("O(1) Constant Speed!", 884, 778, 250);
+    ctx.font = "500 14px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("Weights merged once per", 884, 825, 250);
+    ctx.fillText("composition before MD loop.", 884, 848, 250);
+
+    panel(1204, 466, 678, 542, C.gold, "CROSS-DOMAIN UNIFICATION", "Molecules · Crystals · Catalysis · MOFs");
+    var doms = [
+      ["1.4B -> 50M", "TOTAL CAPACITY vs ACTIVE INFERENCE PARAMS", C.cyan],
+      ["Multi-Domain", "MOLECULES + CRYSTALS + ADSORBATES + ALLOYS", C.orange],
+      ["9.4 meV/atom", "DPA4-PRO ENERGY MAE ON 118M OMat24 BENCHMARK", C.gold]
+    ];
+    for (i = 0; i < doms.length; i++) {
+      var dy = 538 + i * 146;
+      ctx.fillStyle = "rgba(255,255,255,0.03)"; ctx.fillRect(1234, dy, 618, 122);
+      ctx.fillStyle = doms[i][2]; ctx.fillRect(1234, dy, 6, 122);
+      ctx.font = "900 36px " + MONO; ctx.fillStyle = "#fff"; ctx.fillText(doms[i][0], 1262, dy + 56, 570);
+      ctx.font = "600 14px " + MONO; ctx.fillStyle = C.muted; ctx.fillText(doms[i][1], 1262, dy + 94, 570);
+    }
+  }
+
+  function drawShot6(p) {
+    panel(38, 96, 875, 912, C.orange, "DATASET VOLUME EXPLOSION (2,600x IN 4 YEARS)", "LOGARITHMIC TRAJECTORY EXPANSION");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("训练数据规模从 18.7 万跃升至 ~5 亿量子结构", 66, 166, 818);
+
+    var dsets = [
+      ["MPF.2021.2.8 (M3GNet · 2022)", "0.19M", 130, "#637894"],
+      ["MPtrj (CHGNet / MACE · 2023)", "1.58M", 250, C.blue],
+      ["MatterSim (0-5000K, 1000GPa · 2024)", "17.0M", 405, C.cyan],
+      ["MPtrj + Alexandria (MPA / ORB · 2024)", "32.1M", 465, C.cyan],
+      ["GNoME Active Learning Pool (2023)", "89.0M", 545, C.gold],
+      ["OMat24 Non-Equilibrium DFT (2024.10)", "118M", 595, C.orange],
+      ["UMA + OMol25 Multi-Domain (2025)", "~500M", 690, C.gold]
+    ];
+    for (var i = 0; i < dsets.length; i++) {
+      var pr = easeOut((p * 1.45) - i * 0.09);
+      var y = 212 + i * 110;
+      ctx.font = "700 16px " + MONO; ctx.fillStyle = C.ink;
+      ctx.fillText(dsets[i][0], 66, y + 20, 810);
+      ctx.fillStyle = dsets[i][3];
+      ctx.fillRect(66, y + 32, dsets[i][2] * pr, 38);
+      ctx.font = "900 24px " + MONO; ctx.fillStyle = "#fff";
+      ctx.fillText(dsets[i][1], 80 + dsets[i][2] * pr, y + 60);
+    }
+
+    panel(938, 96, 944, 912, C.gold, "SAMPLING PARADIGM SHIFT · OVERCOMING PES SOFTENING", "OMat24 (Meta FAIR · >400M Core-Hours)");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("攻克“势能面系统性软化”：从近平衡弛豫到非平衡采样", 966, 166, 888);
+    ctx.font = "400 17px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("仅采样能量极小点会导致高能区力与曲率严重低估 (PES Softening)；OMat24 引入微扰玻尔兹曼与 AIMD。", 966, 200, 888);
+
+    var gx = 1030, gy = 875, gw = 805, gh = 590;
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx + gw, gy); ctx.moveTo(gx, gy); ctx.lineTo(gx, gy - gh); ctx.stroke();
+
+    ctx.fillStyle = "rgba(56,139,253,0.13)"; ctx.fillRect(gx + 115, gy - 260, 110, 260);
+    ctx.strokeStyle = C.blue; ctx.setLineDash([6, 5]); ctx.strokeRect(gx + 115, gy - 260, 110, 260); ctx.setLineDash([]);
+    ctx.font = "700 14px " + MONO; ctx.fillStyle = C.blue;
+    ctx.fillText("Equilibrium-Only Bias", gx + 88, gy - 272);
+
+    ctx.strokeStyle = C.red; ctx.lineWidth = 4; ctx.setLineDash([10, 6]);
+    ctx.beginPath();
+    for (i = 0; i <= 80; i++) {
+      var r = 0.74 + (i / 80) * 1.85;
+      var x = gx + (i / 80) * gw;
+      var morse = Math.pow(1 - Math.exp(-2.3 * (r - 1.0)), 2) - 1.0;
+      var soft = morse * (1 - 0.44 * Math.tanh(Math.pow((r - 1.0) * 2.4, 2))) - (r > 1.15 ? 0.23 * (r - 1.15) : 0);
+      var yS = clamp(gy - 190 - soft * 245, gy - gh + 20, gy - 10);
+      if (i === 0) ctx.moveTo(x, yS); else ctx.lineTo(x, yS);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = "800 17px " + MONO; ctx.fillStyle = C.red;
+    ctx.fillText("Equilibrium-Biased UIP: PES Softening!", gx + 340, gy - 108, 460);
+    ctx.font = "600 14px " + MONO; ctx.fillText("(Underestimates migration barriers, defects & phonon ω)", gx + 340, gy - 82, 460);
+
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 5;
+    var samplePts = [];
+    ctx.beginPath();
+    for (i = 0; i <= 80; i++) {
+      var r2 = 0.74 + (i / 80) * 1.85;
+      var x2 = gx + (i / 80) * gw;
+      var m2 = Math.pow(1 - Math.exp(-2.3 * (r2 - 1.0)), 2) - 1.0;
+      var yD = clamp(gy - 190 - m2 * 245, gy - gh + 20, gy - 10);
+      if (i === 0) ctx.moveTo(x2, yD); else ctx.lineTo(x2, yD);
+      if (i % 9 === 5) samplePts.push([x2, yD]);
+    }
+    ctx.stroke();
+    ctx.font = "800 18px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("True DFT PES / OMat24 + MatPES UIP", gx + 340, gy - 238, 460);
+
+    var showN = Math.floor(easeOut(p * 1.35) * samplePts.length);
+    for (i = 0; i < showN; i++) {
+      ctx.fillStyle = C.gold;
+      ctx.beginPath(); ctx.arc(samplePts[i][0], samplePts[i][1], 8, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#000"; ctx.lineWidth = 2; ctx.stroke();
+    }
+
+    ctx.fillStyle = "rgba(10,15,24,0.92)"; ctx.fillRect(1310, 265, 535, 138);
+    ctx.strokeStyle = C.gold; ctx.strokeRect(1310, 265, 535, 138);
+    ctx.font = "800 16px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("OMat24 NON-EQUILIBRIUM SAMPLING:", 1332, 302, 495);
+    ctx.font = "600 15px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("• Rattled Boltzmann P(x) ∝ exp(-E / k_B T)", 1332, 336, 495);
+    ctx.fillText("• High-Temp AIMD + Rattled Relaxations", 1332, 366, 495);
+    ctx.fillStyle = C.cyan;
+    ctx.fillText("• Pushes Stability F1 > 0.90 (~20 meV/atom)", 1332, 392, 495);
+
+    ctx.font = "600 15px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("Interatomic / Reaction Coordinate r (Equilibrium r_0 -> High-Energy Barrier)", gx + 75, gy + 42, 720);
+  }
+
+  function drawShot7(p) {
+    var f = easeOut(p * 1.3);
+    panel(38, 96, 955, 912, C.cyan, "DATA CURATION EFFICIENCY · MatPES DIRECT SAMPLING", "Kaplan, Liu, Qi et al. · arXiv:2503.04070");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("两阶段 DIRECT 分层采样：以 1/250 数据量匹敌亿级模型", 66, 166, 895);
+
+    var traps = [
+      [[88,225],[942,225],[820,415],[210,415], "rgba(56,139,253,0.18)", C.blue, "281,000,000 MD SNAPSHOTS", "16 BILLION LOCAL ATOMIC ENVIRONMENTS (300 K MD + MP Pool)"],
+      [[210,445],[820,445],[700,645],[330,645], "rgba(255,184,0,0.16)", C.gold, "2-STAGE DIRECT STRATIFIED CLUSTERING", "DImensionality-Reduced Encoded Clusters · Eliminates Redundancy"]
+    ];
+    for (var i = 0; i < traps.length; i++) {
+      var tr = traps[i];
+      ctx.beginPath();
+      ctx.moveTo(tr[0][0], tr[0][1]); ctx.lineTo(tr[1][0], tr[1][1]);
+      ctx.lineTo(tr[2][0], tr[2][1]); ctx.lineTo(tr[3][0], tr[3][1]);
+      ctx.closePath();
+      ctx.fillStyle = tr[4]; ctx.fill();
+      ctx.strokeStyle = tr[5]; ctx.lineWidth = 2.5; ctx.stroke();
+      ctx.textAlign = "center";
+      ctx.font = "900 26px " + MONO; ctx.fillStyle = "#fff";
+      ctx.fillText(tr[6], 515, tr[0][1] + 82, 580);
+      ctx.font = "600 15px " + MONO; ctx.fillStyle = tr[5];
+      ctx.fillText(tr[7], 515, tr[0][1] + 126, 560);
+    }
+
+    ctx.fillStyle = "rgba(0,212,182,0.18)"; ctx.fillRect(255, 680, 520, 275);
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 3; ctx.strokeRect(255, 680, 520, 275);
+    ctx.font = "900 52px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("~" + Math.round(f * 400) + "K STRUCTURES", 515, 768, 480);
+    ctx.font = "700 18px " + MONO; ctx.fillStyle = "#fff";
+    ctx.fillText("MatPES Stringent Static VASP Calculations", 515, 818, 480);
+    ctx.fillStyle = C.gold;
+    ctx.fillText("1/250x Size vs OMat24 · Equal/Better Accuracy!", 515, 868, 480);
+    ctx.font = "500 14px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("Balanced equilibrium + high-force non-equilibrium coverage", 515, 916, 480);
+    ctx.textAlign = "left";
+
+    panel(1018, 96, 864, 912, C.orange, "CLIMBING PERDEW'S JACOB'S LADDER OF DFT", "MatPES v2025.1 -> v2025.2 (2026) -> WBM-MatPES");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("泛函升维：从 PBE 迈向 r²SCAN 与全周期表电荷基准", 1046, 166, 810);
+
+    var rungs = [
+      [1048, 742, 804, 215, C.line, "RUNG 2 · GGA (PBE Functional)", "Standard workhorse in MPF / MPtrj / OMat24 (also included in MatPES)", "Suffers from self-interaction & systematic heats-of-formation errors", C.muted],
+      [1048, 468, 804, 232, C.orange, "RUNG 3 · META-GGA: r²SCAN (387,897 Structures)", "Satisfies ALL 17 known exact meta-GGA physical constraints!", "High fidelity across covalent, metallic, ionic & van der Waals crystals", C.orange],
+      [1048, 222, 804, 208, C.cyan, "2026 EXTENSIONS: CHARGES & 150 GPa PRESSURE", "• MatPES v2025.2 (2026.04): + Bader & DDEC6 Partial Atomic Charges", "• WBM-MatPES / Tuga-FF (2026.10): High-pressure hull up to 150 GPa", C.cyan]
+    ];
+    for (i = 0; i < rungs.length; i++) {
+      var rg = rungs[i];
+      ctx.fillStyle = "rgba(255,255,255,0.03)"; ctx.fillRect(rg[0], rg[1], rg[2], rg[3]);
+      ctx.strokeStyle = rg[4]; ctx.lineWidth = 2.5; ctx.strokeRect(rg[0], rg[1], rg[2], rg[3]);
+      ctx.font = "900 22px " + MONO; ctx.fillStyle = rg[8]; ctx.fillText(rg[5], rg[0] + 26, rg[1] + 50, 752);
+      ctx.font = "600 16px " + MONO; ctx.fillStyle = "#fff"; ctx.fillText(rg[6], rg[0] + 26, rg[1] + 102, 752);
+      ctx.font = "500 15px " + MONO; ctx.fillStyle = C.muted; ctx.fillText(rg[7], rg[0] + 26, rg[1] + 148, 752);
+    }
+  }
+
+  function drawShot8(p) {
+    var pr = easeOut(p * 1.3);
+
+    panel(38, 96, 598, 912, C.cyan, "CONTRIBUTION 01 · ATOMISTIC MD", "O(N_e³) -> O(N)");
+    ctx.font = "800 30px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("分子动力学提速 10⁴–10⁶ 倍", 64, 166, 545);
+    ctx.font = "400 16px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("突破第一性原理百原子/皮秒瓶颈，直达百万原子与微秒尺度。", 64, 200, 545);
+
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(95, 895); ctx.lineTo(595, 895); ctx.moveTo(95, 895); ctx.lineTo(95, 255); ctx.stroke();
+    ctx.fillStyle = "rgba(255,51,85,0.18)"; ctx.fillRect(115, 715, 165, 155);
+    ctx.strokeStyle = C.red; ctx.strokeRect(115, 715, 165, 155);
+    ctx.font = "800 18px " + MONO; ctx.fillStyle = C.red; ctx.fillText("DFT AIMD", 145, 772);
+    ctx.font = "600 14px " + MONO; ctx.fillStyle = C.ink; ctx.fillText("~10² Atoms · ps", 130, 812);
+
+    var bx = 245, by = lerp(470, 285, pr), bw = lerp(245, 325, pr), bh = lerp(250, 360, pr);
+    ctx.fillStyle = "rgba(0,212,182,0.18)"; ctx.fillRect(bx, by, bw, bh);
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 3; ctx.strokeRect(bx, by, bw, bh);
+    ctx.font = "900 25px " + MONO; ctx.fillStyle = C.cyan; ctx.fillText("MLFF O(N) MD", bx + 26, by + 78, bw - 44);
+    ctx.font = "800 20px " + MONO; ctx.fillStyle = "#fff"; ctx.fillText("10⁵–10⁷ Atoms", bx + 26, by + 128, bw - 44);
+    ctx.fillStyle = C.gold; ctx.fillText("ns -> μs Timescale", bx + 26, by + 172, bw - 44);
+    ctx.font = "600 14px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("0-5000 K · Up to 1000 GPa", bx + 26, by + 216, bw - 44);
+    ctx.fillText("System Size N (Log Scale) ->", 225, 945);
+
+    panel(661, 96, 598, 912, C.gold, "CONTRIBUTION 02 · HTVS DISCOVERY", "CONVEX HULL");
+    ctx.font = "800 30px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("高通量稳定相发现加速 >6×", 687, 166, 545);
+    ctx.font = "400 16px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("精准锁定热力学凸包 (E_hull ≤ 0) 新型固态电解质、磁性与超硬相。", 687, 200, 545);
+
+    ctx.strokeStyle = C.dim; ctx.setLineDash([6, 5]);
+    ctx.beginPath(); ctx.moveTo(705, 315); ctx.lineTo(1215, 315); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = C.gold; ctx.lineWidth = 4.5;
+    ctx.beginPath();
+    ctx.moveTo(705, 315); ctx.lineTo(825, 625); ctx.lineTo(965, 745); ctx.lineTo(1110, 595); ctx.lineTo(1215, 315);
+    ctx.stroke();
+
+    var bad = [[860,480],[920,545],[1015,505],[1065,435],[955,415]];
+    for (var i = 0; i < bad.length; i++) {
+      ctx.fillStyle = C.red; ctx.beginPath(); ctx.arc(bad[i][0], bad[i][1], 7, 0, Math.PI * 2); ctx.fill();
+    }
+    var good = [[825,625],[965,745],[1110,595]];
+    for (i = 0; i < good.length; i++) {
+      ctx.fillStyle = i === 1 ? C.gold : C.cyan;
+      ctx.beginPath(); ctx.arc(good[i][0], good[i][1], 13, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 2.5; ctx.stroke();
+    }
+    ctx.font = "800 20px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("ΔE_hull ≤ 0 STABLE HIT!", 825, 815);
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = "#fff";
+    ctx.fillText("380,000+ Stable Crystals (GNoME) · DAF > 6x", 718, 925, 515);
+
+    panel(1284, 96, 598, 912, C.orange, "CONTRIBUTION 03 · PHONONS & κ_L", "2ND & 3RD DERIVATIVES");
+    ctx.font = "800 30px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("声子色散谱与晶格热导率预测", 1310, 166, 545);
+    ctx.font = "400 16px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("二阶/三阶保守力常数直接求解玻尔兹曼输运方程非谐热导率 κ_L。", 1310, 200, 545);
+
+    var px0 = 1335, py0 = 835, pw = 500, ph = 555;
+    ctx.strokeStyle = C.line; ctx.strokeRect(px0, py0 - ph, pw, ph);
+    var bands = [
+      [C.cyan, function(q){ return py0 - 210 * Math.abs(Math.sin(q * Math.PI * 1.5)); }],
+      [C.cyan, function(q){ return py0 - 295 * Math.pow(Math.abs(Math.sin(q * Math.PI * 1.5)), 0.85); }],
+      [C.orange, function(q){ return py0 - 415 + 46 * Math.cos(q * Math.PI * 3 + p * 6); }],
+      [C.gold, function(q){ return py0 - 495 - 32 * Math.cos(q * Math.PI * 2 - p * 6); }]
+    ];
+    for (var b = 0; b < bands.length; b++) {
+      ctx.strokeStyle = bands[b][0]; ctx.lineWidth = 4;
+      ctx.beginPath();
+      for (i = 0; i <= 60; i++) {
+        var q = i / 60;
+        var xx = px0 + q * pw, yy = bands[b][1](q);
+        if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+      }
+      ctx.stroke();
+    }
+    var kpts = ["Γ", "X", "M", "Γ"];
+    for (i = 0; i < 4; i++) {
+      ctx.font = "800 18px " + MONO; ctx.fillStyle = "#fff";
+      ctx.fillText(kpts[i], px0 + i * (pw / 3) - 6, py0 + 34);
+    }
+    ctx.font = "700 16px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("∂²E/∂r_i∂r_j & ∂³E -> BTE Phonon Thermal κ_L", 1335, 925, 515);
+  }
+
+  function drawShot9(p) {
+    var g = easeOut(p * 1.35);
+    panel(38, 96, 940, 912, C.orange, "SURGE OF OPEN UNIVERSAL INTERATOMIC POTENTIALS", "COMMUNITY BENCHMARKED MODELS (2022 -> 2026)");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("公开参评通用势激增逾 16 倍（1 -> 49 UIPs / 58 Models）", 66, 166, 885);
+
+    var gx = 105, gy = 875, gw = 810, gh = 615;
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx + gw, gy); ctx.moveTo(gx, gy); ctx.lineTo(gx, gy - gh); ctx.stroke();
+
+    var pts = [
+      [gx + 55,  gy - 18,  "2022.11", "1 UIP",   "M3GNet Pioneer"],
+      [gx + 285, gy - 55,  "2023.08", "3 UIPs",  "13 Total Models"],
+      [gx + 525, gy - 235, "2024.12", "17 UIPs", "OMat24 & ORB Era"],
+      [gx + 750, gy - 555, "2026",    "49 UIPs", "58 Benchmarked"]
+    ];
+    ctx.fillStyle = "rgba(255,79,23,0.15)";
+    ctx.beginPath(); ctx.moveTo(pts[0][0], gy);
+    for (var i = 0; i < pts.length; i++) ctx.lineTo(pts[i][0], lerp(gy, pts[i][1], g));
+    ctx.lineTo(pts[3][0], gy); ctx.closePath(); ctx.fill();
+
+    ctx.strokeStyle = C.orange; ctx.lineWidth = 5;
+    ctx.beginPath();
+    for (i = 0; i < pts.length; i++) {
+      var py = lerp(gy, pts[i][1], g);
+      if (i === 0) ctx.moveTo(pts[i][0], py); else ctx.lineTo(pts[i][0], py);
+    }
+    ctx.stroke();
+
+    for (i = 0; i < pts.length; i++) {
+      var py2 = lerp(gy, pts[i][1], g);
+      ctx.fillStyle = C.gold; ctx.beginPath(); ctx.arc(pts[i][0], py2, 11, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 2.5; ctx.stroke();
+      ctx.textAlign = "center";
+      ctx.font = "900 26px " + MONO; ctx.fillStyle = "#fff"; ctx.fillText(pts[i][3], pts[i][0], py2 - 36);
+      ctx.font = "600 13px " + MONO; ctx.fillStyle = C.cyan; ctx.fillText(pts[i][4], pts[i][0], py2 - 15);
+      ctx.font = "700 16px " + MONO; ctx.fillStyle = C.ink; ctx.fillText(pts[i][2], pts[i][0], gy + 38);
+    }
+    ctx.textAlign = "left";
+
+    panel(1004, 96, 878, 912, C.cyan, "VERIFIED CITATION IMPACT & OPEN SIMULATION STACK", "SEMANTIC SCHOLAR & PRODUCTION ENGINES");
+    ctx.font = "800 28px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("开山代表作千级施引辐射 & 全栈软件生态", 1032, 166, 822);
+
+    var cites = [
+      ["NequIP (E(3) Equivariant GNN · Nat. Commun. 2022)", 2576, 545, C.blue],
+      ["CHGNet (Spin/Charge-Informed UIP · Nat. Mach. Intell. 2023)", 1212, 325, C.gold],
+      ["M3GNet (Universal 3-Body IAP · Nat. Comput. Sci. 2022.11.28)", 1173, 312, C.orange]
+    ];
+    for (i = 0; i < cites.length; i++) {
+      var cy = 222 + i * 112;
+      ctx.font = "700 15px " + MONO; ctx.fillStyle = C.ink; ctx.fillText(cites[i][0], 1032, cy + 18, 820);
+      ctx.fillStyle = cites[i][3]; ctx.fillRect(1032, cy + 32, cites[i][2] * g, 36);
+      ctx.font = "900 22px " + MONO; ctx.fillStyle = "#fff";
+      ctx.fillText(Math.round(cites[i][1] * g) + "+ Citations", 1046 + cites[i][2] * g, cy + 58);
+    }
+
+    ctx.fillStyle = "rgba(0,212,182,0.05)"; ctx.fillRect(1032, 578, 822, 396);
+    ctx.strokeStyle = C.cyan; ctx.strokeRect(1032, 578, 822, 396);
+    ctx.font = "800 19px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("OPEN-SOURCE PRODUCTION INFRASTRUCTURE:", 1058, 622);
+    var stack = [
+      "LAMMPS (ML-IAP / Kokkos)", "ASE & Pymatgen", "MatGL (PyG + JAX)",
+      "DeePMD-kit v3 (DPA-4)", "MACE & e3nn", "FAIRChem (OMat / UMA)",
+      "SevenNet Multi-GPU", "TorchSim Batched MD", "JAX-MD & Phonopy"
+    ];
+    for (i = 0; i < stack.length; i++) {
+      var r = Math.floor(i / 3), c = i % 3;
+      var sx = 1058 + c * 262, sy = 652 + r * 98;
+      ctx.fillStyle = "rgba(255,255,255,0.04)"; ctx.fillRect(sx, sy, 246, 74);
+      ctx.strokeStyle = C.line; ctx.strokeRect(sx, sy, 246, 74);
+      ctx.font = "700 15px " + MONO; ctx.fillStyle = "#fff";
+      ctx.textAlign = "center"; ctx.fillText(stack[i], sx + 123, sy + 43, 232); ctx.textAlign = "left";
+    }
+  }
+
+  function drawShot10(p) {
+    var pr = easeOut(p * 1.3);
+    panel(38, 96, 945, 912, C.gold, "COMMUNITY BENCHMARK FRAMEWORK · NOT A MODEL", "Riebesell et al., Nat. Mach. Intell. 7, 836-847 (2025)");
+    ctx.font = "900 42px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("Matbench Discovery", 66, 174);
+    ctx.fillStyle = "rgba(255,184,0,0.16)"; ctx.fillRect(520, 140, 435, 42);
+    ctx.strokeStyle = C.gold; ctx.strokeRect(520, 140, 435, 42);
+    ctx.font = "800 15px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("DFT-REFERENCE CONVEX HULL BENCHMARK", 542, 167, 395);
+
+    ctx.font = "400 16px " + SANS; ctx.fillStyle = C.muted;
+    ctx.fillText("客观总览标尺：热力学凸包严格由 DFT 参考能量构建（非模型自预测凸包），综合评估晶体稳定性、", 66, 214, 888);
+    ctx.fillText("几何结构优化、声子与热导率、分子动力学及双原子势能曲线平滑度。", 66, 240, 888);
+
+    var gx = 105, gy = 855, gw = 830, gh = 515;
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx + gw, gy); ctx.moveTo(gx, gy); ctx.lineTo(gx, gy - gh); ctx.stroke();
+
+    var sota = [
+      [gx + 45,  gy - 195, "M3GNet (0.428)",      "2022.11"],
+      [gx + 200, gy - 235, "CHGNet (F1 0.613)",   "2023.09"],
+      [gx + 365, gy - 385, "MACE-MPA-0 (0.795)",  "2024"],
+      [gx + 525, gy - 445, "eSEN-30M (0.888)",    "2025.02"],
+      [gx + 675, gy - 458, "PET-OAM-XL (0.898)",  "2026.02"],
+      [gx + 795, gy - 472, "DPA-4.1-Max (0.910+)", "2026"]
+    ];
+    ctx.strokeStyle = C.cyan; ctx.lineWidth = 5;
+    ctx.beginPath();
+    for (var i = 0; i < sota.length; i++) {
+      var yy = lerp(gy, sota[i][1], pr);
+      if (i === 0) ctx.moveTo(sota[i][0], yy); else ctx.lineTo(sota[i][0], yy);
+    }
+    ctx.stroke();
+
+    for (i = 0; i < sota.length; i++) {
+      var yy2 = lerp(gy, sota[i][1], pr);
+      ctx.fillStyle = i === 5 ? C.gold : C.orange;
+      ctx.beginPath(); ctx.arc(sota[i][0], yy2, i === 5 ? 11 : 8, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.textAlign = "center";
+      ctx.font = "800 14px " + MONO; ctx.fillStyle = i === 5 ? C.gold : "#fff";
+      ctx.fillText(sota[i][2], sota[i][0] - (i === 5 ? 45 : 0), yy2 + (i % 2 === 0 ? -18 : 28));
+      ctx.font = "600 13px " + MONO; ctx.fillStyle = C.muted;
+      ctx.fillText(sota[i][3], sota[i][0], gy + 32);
+    }
+    ctx.textAlign = "left";
+
+    ctx.fillStyle = "rgba(255,255,255,0.035)"; ctx.fillRect(66, 916, 888, 64);
+    ctx.strokeStyle = C.line; ctx.strokeRect(66, 916, 888, 64);
+    ctx.font = "800 15px " + MONO; ctx.fillStyle = C.ink;
+    ctx.fillText("CPS FORMULA = 50% F1 (Stability) + 40% κ_SRME (Phonon Thermal) + 10% RMSD (Relaxation)", 84, 954, 850);
+
+    panel(1008, 96, 874, 912, C.cyan, "MULTI-TASK LEADERBOARD PANORAMA", "matbench-discovery.materialsproject.org");
+    ctx.font = "800 26px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("四年精度跃迁：CPS 0.428 -> 0.910+  |  F1 0.569 -> 0.933+", 1034, 166, 822);
+
+    var rows = [
+      ["MODEL REPRESENTATIVE", "CPS ↑", "F1 ↑", "κ_SRME ↓", "RMSD (Å) ↓", "ERA"],
+      ["DPA-4.1-Max-OAM",      "0.910", "0.933", "0.090", "0.0573", "2026 OAM"],
+      ["TECE-OAM-RRA-1.0",     "0.908", "0.929", "0.093", "0.0575", "2026 OAM"],
+      ["EquiformerV3+DeNS",    "0.902", "0.931", "0.101", "0.0576", "2026 OAM"],
+      ["GRACE-3L-OAM-L",       "0.900", "0.925", "0.112", "0.0585", "2026 OAM"],
+      ["PET-OAM-XL (730M)",    "0.898", "0.924", "0.118", "0.0589", "2026 OAM"],
+      ["DPA-4.1-Air (5.15M)",  "0.893", "0.921", "0.136", "0.0601", "2026 Fast"],
+      ["eSEN-30M-OAM",         "0.888", "0.925", "0.170", "0.0598", "2025 Meta"],
+      ["ORB v3",               "0.861", "0.905", "0.242", "0.0620", "2025 Fast"],
+      ["SevenNet-Omni (MPA)",  "0.849", "0.889", "0.265", "0.0639", "2025 Cross"],
+      ["DPA4-Pro (MPtrj Cmp)", "0.842", "0.865", "0.227", "0.0680", "2026 Cmp#1"],
+      ["MACE-MPA-0",           "0.795", "0.830", "0.380", "0.0695", "2024 Base"],
+      ["CHGNet (MPtrj)",       "0.400", "0.613", "1.420", "0.0920", "2023 Spin"],
+      ["M3GNet (MPF.2021)",    "0.428", "0.569", "1.310", "0.0980", "2022 Origin"]
+    ];
+    var cols = [1034, 1315, 1418, 1520, 1640, 1758];
+    for (var r = 0; r < rows.length; r++) {
+      var ry = 204 + r * 54;
+      if (r === 1) { ctx.fillStyle = "rgba(255,184,0,0.14)"; ctx.fillRect(1028, ry - 26, 832, 46); }
+      else if (r === 10) { ctx.fillStyle = "rgba(0,212,182,0.10)"; ctx.fillRect(1028, ry - 26, 832, 46); }
+      else if (r >= 12) { ctx.fillStyle = "rgba(255,79,23,0.11)"; ctx.fillRect(1028, ry - 26, 832, 46); }
+
+      ctx.strokeStyle = "rgba(255,255,255,0.07)";
+      ctx.beginPath(); ctx.moveTo(1028, ry + 20); ctx.lineTo(1860, ry + 20); ctx.stroke();
+
+      ctx.font = (r <= 1 ? "800 15px " : "600 15px ") + MONO;
+      for (var c = 0; c < 6; c++) {
+        ctx.fillStyle = r === 0 ? C.muted : (r === 1 && c === 1 ? C.gold : (r >= 12 ? "#ffd3c4" : "#fff"));
+        ctx.fillText(rows[r][c], cols[c], ry + 4);
+      }
+    }
+  }
+
+  function drawShot11(p) {
+    panel(38, 96, 1844, 912, C.orange, "FOURTH ANNIVERSARY MONUMENT", "2022.11.28 — 2026.11.28");
+    var cx = 960, cy = 535, a = p * 1.4;
+
+    ctx.strokeStyle = "rgba(255,79,23,0.22)"; ctx.lineWidth = 1.5; ctx.setLineDash([12, 8]);
+    ctx.beginPath(); ctx.arc(cx, cy, 340 + p * 30, 0, Math.PI * 2); ctx.stroke();
+    ctx.strokeStyle = "rgba(0,212,182,0.18)";
+    ctx.beginPath(); ctx.arc(cx, cy, 430 + p * 40, 0, Math.PI * 2); ctx.stroke();
+    ctx.setLineDash([]);
+
+    var verts = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+    var pv = [];
+    for (var i = 0; i < verts.length; i++) {
+      var x = verts[i][0], y = verts[i][1], z = verts[i][2];
+      var rx = x * Math.cos(a) - z * Math.sin(a);
+      var rz = x * Math.sin(a) + z * Math.cos(a);
+      var ry = y * Math.cos(0.45) - rz * Math.sin(0.45);
+      pv.push([cx + rx * 285, cy + ry * 285]);
+    }
+    var edges = [[0,2],[0,3],[0,4],[0,5],[1,2],[1,3],[1,4],[1,5],[2,4],[4,3],[3,5],[5,2]];
+    ctx.strokeStyle = "rgba(0,212,182,0.16)"; ctx.lineWidth = 2;
+    for (i = 0; i < edges.length; i++) {
+      ctx.beginPath();
+      ctx.moveTo(pv[edges[i][0]][0], pv[edges[i][0]][1]);
+      ctx.lineTo(pv[edges[i][1]][0], pv[edges[i][1]][1]);
+      ctx.stroke();
+    }
+
+    ctx.textAlign = "center";
+    ctx.font = "700 20px " + MONO; ctx.fillStyle = C.cyan;
+    ctx.fillText("UNIVERSAL MACHINE LEARNING INTERATOMIC POTENTIALS · 4TH ANNIVERSARY", cx, 325, 1680);
+
+    ctx.font = "900 102px " + MONO; ctx.fillStyle = "#fff";
+    ctx.fillText("2022.11.28 — 2026.11.28", cx, 468, 1740);
+
+    ctx.font = "900 54px " + SANS; ctx.fillStyle = C.ink;
+    ctx.fillText("机器学习力场基座势函数 · 四周年致敬", cx, 575, 1740);
+
+    ctx.font = "800 24px " + MONO; ctx.fillStyle = C.gold;
+    ctx.fillText("FOUR YEARS OF MLFF FOUNDATIONAL POTENTIALS", cx, 638, 1680);
+
+    ctx.strokeStyle = C.line;
+    ctx.beginPath(); ctx.moveTo(310, 718); ctx.lineTo(1610, 718); ctx.stroke();
+
+    ctx.font = "700 17px " + MONO; ctx.fillStyle = C.muted;
+    ctx.fillText("89+ ELEMENTS   ·   10⁸+ QUANTUM FRAMES   ·   E(3)/SO(2) + SPIN + O(N) CHARGE   ·   MATBENCH CPS 0.428 -> 0.910+", cx, 768, 1720);
+    ctx.textAlign = "left";
+  }
+
+  var prevShotIdx = -1, prevBeat = -1, flash = 0;
+
+  function elapsed() {
+    if (!playing) return pausedAt;
+    return clamp(ac.currentTime - startAt, 0, DUR);
+  }
+
+  function loop() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var t = elapsed();
+    var bf = t / BEAT;
+    var bi = Math.floor(bf);
+
+    if (playing && ac && !muted && t < DUR - 0.04) {
+      var targetStep = Math.floor((t + 0.12) / STEP);
+      while (lastStep < targetStep && lastStep < TOTAL_BEATS * 4) {
+        lastStep++;
+        var when = startAt + lastStep * STEP;
+        if (when >= ac.currentTime - 0.02) schedStep(lastStep, when);
+      }
+    }
+
+    var sIdx = SHOTS.length - 1;
+    for (var i = 0; i < SHOTS.length; i++) {
+      if (bf >= SHOTS[i].b0 && bf < SHOTS[i].b1) { sIdx = i; break; }
+    }
+    var shot = SHOTS[sIdx];
+
+    if (sIdx !== prevShotIdx) {
+      flash = 0.24;
+      telEl.textContent = shot.tel;
+      prevShotIdx = sIdx;
+    } else if (bi !== prevBeat) {
+      flash = (bi % 4 === 0) ? 0.08 : 0.03;
+      prevBeat = bi;
+    } else {
+      flash *= 0.84;
+    }
+
+    scrub.value = t;
+    drawGridAndHUD(t, bf, shot, flash);
+
+    var sp = clamp((bf - shot.b0) / (shot.b1 - shot.b0), 0, 1);
+    if (sIdx === 0) drawShot1(sp);
+    else if (sIdx === 1) drawShot2(sp);
+    else if (sIdx === 2) drawShot3(sp);
+    else if (sIdx === 3) drawShot4(sp);
+    else if (sIdx === 4) drawShot5(sp);
+    else if (sIdx === 5) drawShot6(sp);
+    else if (sIdx === 6) drawShot7(sp);
+    else if (sIdx === 7) drawShot8(sp);
+    else if (sIdx === 8) drawShot9(sp);
+    else if (sIdx === 9) drawShot10(sp);
+    else drawShot11(sp);
+
+    if (t >= DUR && playing) {
+      playing = false;
+      pausedAt = DUR;
+      btnPP.textContent = "REPLAY";
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function playFrom(sec) {
+    initAudio();
+    if (ac.state === "suspended") ac.resume();
+    pausedAt = clamp(sec, 0, DUR);
+    startAt = ac.currentTime - pausedAt;
+    lastStep = Math.floor(pausedAt / STEP) - 1;
+    playing = true;
+    btnPP.textContent = "PAUSE";
+  }
+
+  document.getElementById("playBtn").onclick = function() {
+    overlay.style.display = "none";
+    playFrom(0);
+  };
+
+  btnPP.onclick = function() {
+    if (playing) {
+      pausedAt = elapsed();
+      playing = false;
+      btnPP.textContent = "PLAY";
+    } else {
+      playFrom(pausedAt >= DUR - 0.1 ? 0 : pausedAt);
+    }
+  };
+
+  scrub.oninput = function(e) {
+    var v = parseFloat(e.target.value);
+    pausedAt = v;
+    if (playing) playFrom(v);
+  };
+
+  btnMute.onclick = function() {
+    muted = !muted;
+    if (master && ac) master.gain.setValueAtTime(muted ? 0 : 0.82, ac.currentTime);
+    btnMute.textContent = muted ? "AUDIO: MUTED" : "AUDIO: ON";
+  };
+
+  requestAnimationFrame(loop);
+})();
+</script>
+
+
+</body></html>

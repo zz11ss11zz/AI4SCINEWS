@@ -7,12 +7,12 @@
 
 # Special: 致敬基础势函数四周年 (2022.11.28-2026.11.28)
 
-| Claude Fable 5.2 | GPT6 Astra |
-| --- | --- |
-| https://github.com/user-attachments/assets/4610ac1d-d926-491c-8ffc-de0dc898e112 | https://github.com/user-attachments/assets/86a9e26b-ca36-411a-8f7b-0b2ac91dc5b8 |
+| Claude Fable 5.2 | GPT6 Astra | Gemini 4 Carbon |
+| --- | --- | --- |
+| https://github.com/user-attachments/assets/4610ac1d-d926-491c-8ffc-de0dc898e112 | https://github.com/user-attachments/assets/86a9e26b-ca36-411a-8f7b-0b2ac91dc5b8 | https://github.com/user-attachments/assets/6dc35325-f65d-46ca-ac2b-98ac35aeb865 |
 
 <details>
-<summary>查看视频制作提示词（Gemini 4 Carbon 投稿可沿用）</summary>
+<summary>查看视频制作提示词</summary>
 
 清除记忆，新建一个项目。假设你是一个导演与 AI for Science 领域的资深人士。
 
@@ -26,7 +26,7 @@
 
 </details>
 
-**征集 Gemini 4 Carbon 版**　如果由你来讲这四年，你会选哪项工作作为开场？欢迎用 Gemini 4 Carbon 制作一部同题短片，在[本仓库提交 Issue](https://github.com/zz11ss11zz/AI4SCINEWS/issues/new) 分享作品链接。也欢迎附上提示词或简短的制作说明，方便大家对照三版的选材、叙事和画面。
+[下载 Gemini 4 Carbon 交互原作（HTML）](https://github.com/zz11ss11zz/AI4SCINEWS/raw/refs/heads/main/assets/videos/google_carbon_mlff.html)，保存后用浏览器打开即可播放。
 
 # AI4SCI · 科研计算与工业仿真情报
 
