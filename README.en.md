@@ -23,6 +23,10 @@ AI4SCI curates research that uses AI or scientific computing in materials scienc
 
 Use the site’s language switch to browse the same sections in English or Chinese. English paper pages show the author’s original abstract where available. The Chinese edition provides abstract translations and explains why papers are worth reading. Selected open-access papers also have reading guides.
 
+[![Example of the AI4SCI feed showing date groups, filters, and paper cards](assets/feed.png)][home]
+
+*The screenshot shows the Chinese interface. Open the live feed for the current navigation.*
+
 ## Explore AI4SCI
 
 | Section | What you can do |
@@ -38,15 +42,45 @@ Use the site’s language switch to browse the same sections in English or Chine
 | [Skills tracker][skills] | Find research skills collections such as Academic Research Skills and Nature Skills, along with their official releases where available. |
 | [Bookmarks][bookmarks] | Reopen saved items. Bookmarks are stored in the current browser. |
 
-## Start with a research question
+## Three ways to use AI4SCI
 
-- **Find a paper.** If you study molecular simulations for drug delivery, try the medicine and simulation filters in the feed, read the abstract, and follow the paper link to check the system, method, and conditions.
-- **Choose a force field.** Pick the benchmark closest to your task, then check the dataset, metric, and model version at the benchmark source.
-- **Track a release.** Find your project in the software and repositories tracker, then open the official release notes to see whether a numerical fix, updated model weights, or an interface change affects your workflow.
+### Read a paper, from the research question to the original source
+
+Suppose you are looking at molecular simulation for drug delivery. Start in the [research feed][home] with the medicine and simulation filters. Open a paper and read the abstract to see what the authors simulated and what their results support. Follow the paper link to check the methods and conditions. If you want to discuss it at a lab meeting, [bookmark it][bookmarks]. Bookmarks are stored in the current browser.
+
+AI4SCI organizes research by original publication date. It uses the author’s abstract to check the subject, the AI or simulation methods used, and the main findings. Selected open-access papers also have full-text reading guides.
+
+### Choose a force field, starting with the task
+
+The [machine-learning force field page][mlff] opens with the overall Matbench Discovery leaderboard. If you care about structure relaxation or thermal conductivity, switch to the relevant task. To explore model size, open the Pareto frontier. It plots trainable parameter count against the Matbench composite performance score (CPS). The frontier helps identify which models lead on CPS at different parameter budgets.
+
+The page keeps the source rankings and links, including the separate NIST CHIPS-FF benchmarks. Follow those links to check the test set, metric, and model version before comparing scores.
+
+[![Example of the machine-learning force field leaderboards and task tabs](assets/mlff.png)][mlff]
+
+### Follow a tool, from its name to the official release notes
+
+In the [Software tab][software], look for VASP, Quantum ESPRESSO, or LAMMPS to see what the tool is used for, which changes AI4SCI tracks, and where maintainers publish updates. Switch to [Repositories][repositories] for projects such as MOOSE or FAIRChem. The directory shows the reported update date and when AI4SCI last checked. To decide whether to upgrade, use the official release notes to check for fixes or changes that affect your calculations.
+
+## Which sources does AI4SCI track?
+
+The [source directory snapshot](SOURCES.md) lists **79 journal and conference sources, 23 scientific software projects, and 44 repositories** as checked on **November 10, 2026**. Use the live directories for the latest listings and updates.
+
+| Type | Examples | Live directory |
+| --- | --- | --- |
+| Journals and conferences | Physical Review Letters, Materials Today Physics, NeurIPS proceedings | [Journals & conferences][journals] |
+| Scientific software | VASP, Quantum ESPRESSO, LAMMPS | [Software][software] |
+| Code repositories | MOOSE, FAIRChem, MatGL | [Repositories][repositories] |
+| Industry research | Google DeepMind, NVIDIA, Meta FAIR | [Industry tracker][industry] |
+| Research skills | Academic Research Skills, Nature Skills | [Skills tracker][skills] |
+
+**[Browse the source directory snapshot](SOURCES.md)**
 
 ## Suggest a source
 
-Check the [live journals and conferences list][journals], the [software and repositories tracker][software], or the [source directory snapshot](SOURCES.md) before [submitting a suggestion][suggest]. Include an official link, a category, and what makes the source worth following. For example, a project may publish changes to model weights and ASE compatibility in its release notes. See [About AI4SCI][about] for how the site selects and organizes research.
+Check the [live journal and conference directory][journals], the [software and repositories tracker][software], or the [source directory snapshot](SOURCES.md) before [submitting a suggestion][suggest]. Include the official link, a category, and why the source is worth following.
+
+For example, “We use this library to train interatomic potentials. Its release notes tell us which model weights are compatible with the ASE interface, so we check them before upgrading.” This context helps maintainers know where to look and which changes matter. Maintainers record what they find in the original issue and add the site entry when the source is listed. See [About AI4SCI][about] for the editorial approach.
 
 [home]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot?lang=en
 [weekly]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/weekly?lang=en
