@@ -5,6 +5,8 @@
   </picture>
 </p>
 
+**简体中文 · [English](README.en.md)**
+
 # Special: 致敬基础势函数四周年 (2022.11.28-2026.11.28)
 
 | Claude Fable 5.2 | GPT6 Astra | Gemini 4 Carbon |
@@ -28,70 +30,47 @@
 
 # AI4SCI · 科研计算与工业仿真情报
 
-做电池材料的分子动力学模拟，今天有哪些论文值得读？选机器学习力场时，哪个模型在关心的任务上表现更好？常用的科学软件最近发布了什么版本？
+AI4SCI 面向材料、化学、医药、凝聚态物理及相关工业应用的研究者，汇集采用 AI 或科学计算的研究进展，并跟踪评测榜单、软件版本与企业研发动态。每条记录提供可回查的论文、评测或官方发布入口。
 
-AI4SCI 把论文、评测榜单和工具更新放在一个中文网站里，面向材料、化学、医药、凝聚态物理及相关工业应用的研究者。你可以从一个研究问题出发，找到论文、模型或软件，再沿链接回到作者原文、评测榜单或官方公告。
+**[打开中文站][home] · [Open English site](https://ai4scihot.8-220-189-127.sslip.io/ai4scihot?lang=en) · [推荐信源][suggest]**
 
-**[打开 AI4SCI][home] · [浏览信源目录](SOURCES.md) · [推荐一个信源][suggest]**
+网站提供语言切换，同一栏目可以用中文或英文浏览。中文论文页提供摘要译文和推荐理由，可从原文入口核对研究方法与结论。英文论文页在可取得时展示作者原始英文摘要。部分开放获取论文附有全文导读。
 
-[![AI4SCI 在线信息流，展示领域筛选、原始发表日期和论文卡片](assets/feed.png)][home]
+## 浏览栏目
 
-## 从你的研究问题开始
-
-| 你现在想做什么 | 从这里开始 |
+| 栏目 | 可以做什么 |
 | --- | --- |
-| 看今天有哪些论文值得细读 | [科研动态][home]，按领域和研究主题缩小范围 |
-| 补看上周错过的进展 | [科研周报][weekly]，选择周次，按天回顾 |
-| 为模拟挑选机器学习力场 | [MLFF 榜单][mlff]，切换稳定性、结构优化、动力学或声子与热导等任务 |
-| 跟进常用软件或模型仓库 | [软件追踪][software] 和 [仓库追踪][repos]，找到维护者的官方发布入口 |
-| 寻找做相近方向的团队 | [学者与课题组][groups]，搜索姓名、机构或研究方向，再访问课题组主页 |
-| 找某个科研环节可用的 Agent | [Agent4Science][agents]，按实验设计、数据分析等任务浏览工具和对应文献 |
+| [信息流][home] | 按原始发表日期浏览，结合领域、方法和关键词缩小范围。 |
+| [科研周报][weekly] | 选择周次，补看该周精选研究。 |
+| [学者与课题组][groups] | 按姓名、机构或研究方向查找团队并访问其主页。 |
+| [机器学习力场][mlff] | 从 Matbench Discovery 总榜进入，按稳定性、结构优化、动力学、声子和热导等任务查看来源榜单，也可浏览 NIST CHIPS-FF 专项。 |
+| [Agent4Science][agents] | 按实验设计、数据分析等科研环节浏览 Agent、工具和相关文献。 |
+| [期刊会议追踪][journals] | 按出版方浏览期刊与会议论文集及其官方入口。 |
+| [软件][software]与[仓库][repositories] | 在同一页切换两类目录，查看 VASP、LAMMPS、MOOSE、FAIRChem 等项目的跟踪重点、最近检查时间和官方更新。 |
+| [企业追踪][industry] | 按公司或科研任务筛选材料、化学和药物研发动态，回查官方证据。 |
+| [Skill 追踪][skills] | 查看 Academic Research Skills、Nature Skills 等科研技能项目及其正式版本。 |
+| [收藏][bookmarks] | 找回此前保存的条目。收藏保存在当前浏览器。 |
 
-## 三种实际用法
+## 从研究问题出发
 
-### 读论文：从研究问题找到原文
+- **找论文。** 例如关注药物递送中的分子模拟，可在信息流尝试「医药」和「仿真」筛选，先读摘要，再打开原文查证研究对象、方法和条件。
+- **选力场。** 先选与工作最接近的评测任务，再沿来源链接核对数据集、指标和模型版本。
+- **跟版本。** 在软件仓库追踪中找到项目，从官方发布说明判断数值修复、模型权重或接口变更是否影响现有工作。
 
-假设你关心分子模拟在药物递送中的应用。进入[科研动态][home]，从「医药」和「仿真」筛选入手。看到感兴趣的论文，先读中文摘要，判断模拟研究了什么对象、支持了什么结论，再通过原文链接核对方法与条件。想留到组会讨论，可以加入[收藏][starred]；收藏保存在当前浏览器。
+## 推荐信源
 
-站点按原始发表日整理研究动态。期刊论文依据作者原始摘要核验主题、实际使用的 AI 或仿真方法及主要结论。符合条件的开放获取论文还可补充全文导读。
+先在[线上期刊会议目录][journals]、[软件与仓库目录][software]或[信源目录快照](SOURCES.md)查重，再[提交信源推荐][suggest]。提供官方链接、类别和持续跟踪的理由，例如哪个 Release 会说明模型权重与 ASE 接口的兼容性。有关选题和证据核对方式，可阅读[关于本站][about]。
 
-### 选力场：先看任务，再看模型
-
-在[机器学习力场榜单][mlff]中，Matbench 总榜提供综合表现。若你关心的是结构优化或热导，可以直接切换到对应任务。想比较模型规模时，点击「斩杀线」，横轴是可训练参数量，纵轴是 Matbench 的 CPS 综合分。沿阶梯查找，就能看到给定参数预算下表现最好的模型。
-
-页面保留来源榜单的顺序和入口。NIST CHIPS-FF 专项可单独查看；比较数值前，可以回到对应来源核对测试集、指标和模型版本。
-
-[![线上 MLFF 榜单，可按评测任务切换并打开模型来源](assets/mlff.png)][mlff]
-
-### 跟工具：从项目名称找到官方更新
-
-在[软件追踪][software]中搜索 VASP、Quantum ESPRESSO 或 LAMMPS，查看软件用途、关注重点和官方更新入口。在[仓库追踪][repos]中搜索 MOOSE 或 FAIRChem，可以找到代码仓库、最近更新时间和本站检查日期。需要判断某次升级会不会影响现有计算时，从官方 Release 的版本说明查起。
-
-## 我们在跟踪哪些来源？
-
-截至 **2026 年 11 月 10 日**，线上目录收录 **79 个期刊与会议来源、23 项科研软件、44 个代码仓库项目**。下表列出部分例子，完整目录附有官方链接、关注内容和跟踪状态。
-
-| 类型 | 来源举例 | 去哪里看 |
-| --- | --- | --- |
-| 期刊与会议 | Physical Review Letters、Materials Today Physics、NeurIPS 论文集 | [期刊会议追踪][sources] |
-| 科研软件 | VASP、Quantum ESPRESSO、LAMMPS | [软件目录][software] |
-| 代码仓库 | MOOSE、FAIRChem、MatGL | [仓库目录][repos] |
-
-**[查看完整信源清单 →](SOURCES.md)**
-
-## 把你常用的信源推荐给大家
-
-如果你经常读一本专业期刊，或长期关注某个科研工具，欢迎先在[信源目录](SOURCES.md)按名称或网址查重，再[提交信源推荐][suggest]。表单只需填三项：**官方链接、类别、值得持续关注的理由**。
-
-理由可以具体到你的工作。例如：“我们用这个库做原子间势训练。它的 Release 会说明模型权重和 ASE 接口的兼容性，升级前需要核对。” 这样的背景有助于判断应该跟踪哪个入口、哪些更新值得报道。维护者会在原 Issue 记录核查结果，接入后补上网站入口。
-
-[home]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot
-[weekly]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/weekly
-[mlff]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/mlff
-[software]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/software
-[repos]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/github
-[groups]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/groups
-[agents]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/agent4science
-[starred]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/starred
-[sources]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/sources
+[home]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot?lang=zh
+[weekly]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/weekly?lang=zh
+[groups]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/groups?lang=zh
+[mlff]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/mlff?lang=zh
+[agents]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/agent4science?lang=zh
+[journals]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/sources?lang=zh
+[software]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/software?lang=zh
+[repositories]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/software?lang=zh#repositories
+[industry]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/enterprise?lang=zh
+[skills]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/skills?lang=zh
+[bookmarks]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/starred?lang=zh
+[about]: https://ai4scihot.8-220-189-127.sslip.io/ai4scihot/about?lang=zh
 [suggest]: https://github.com/zz11ss11zz/AI4SCINEWS/issues/new?template=source.yml
