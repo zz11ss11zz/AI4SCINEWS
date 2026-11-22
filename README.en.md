@@ -23,9 +23,9 @@ AI4SCI curates research that uses AI or scientific computing in materials scienc
 
 Use the site’s language switch to browse the same sections in English or Chinese. English paper pages show the author’s original abstract where available. The Chinese edition provides abstract translations and explains why papers are worth reading. Selected open-access papers also have reading guides.
 
-[![Example of the AI4SCI feed showing date groups, filters, and paper cards](assets/feed.png)][home]
+[![English AI4SCI feed showing date groups, filters, and paper cards](assets/feed-en.png)][home]
 
-*The screenshot shows the Chinese interface. Open the live feed for the current navigation.*
+*English desktop site, captured November 22, 2026.*
 
 ## Explore AI4SCI
 
@@ -56,7 +56,7 @@ The [machine-learning force field page][mlff] opens with the overall Matbench Di
 
 The page keeps the source rankings and links, including the separate NIST CHIPS-FF benchmarks. Follow those links to check the test set, metric, and model version before comparing scores.
 
-[![Example of the machine-learning force field leaderboards and task tabs](assets/mlff.png)][mlff]
+[![English machine-learning force field leaderboard and task tabs](assets/mlff-en.png)][mlff]
 
 ### Follow a tool, from its name to the official release notes
 
